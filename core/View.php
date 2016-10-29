@@ -2,6 +2,9 @@
 namespace core;
 
 class View{
+	private $VIEW_PATH_PREFIX = 'app/views/';
+	private $VIEW_PATH_SUFFIX = '.php';
+
 	public function __construct(){
 		
 	}
@@ -10,16 +13,26 @@ class View{
 		echo $value;
 	}
 
-	public function renderTemplate($model){
+	public function renderTemplate($model = null){
 		$viewName = strtolower(basename(debug_backtrace()[1]['class'], 'Controller'));
 		$action = debug_backtrace()[1]['function'];
 
-		$viewPath = 'app/views/' . $viewName . '/' . $action . '.php';
+		$viewPath = $this->VIEW_PATH_PREFIX . $viewName . '/' . $action . $this->VIEW_PATH_SUFFIX;
 		
+		$this->_renderLayout($viewPath, $model);
+	}
+
+	public function renderView($viewPath, $model = null){
+		$viewPath = $this->VIEW_PATH_PREFIX . $viewPath . $this->VIEW_PATH_SUFFIX;
+		$this->_renderLayout($viewPath, $model);
+	}
+
+	private function _renderLayout($viewPath, $model = null){
 		ob_start();
 		include $viewPath;
 		$templateOutput = ob_get_clean();
 
+		$LAYOUT_SECTION = array();
 		$arr = simplexml_load_string($templateOutput)->layoutsection;
 		foreach ($arr as $section) {
 			$key = (string)$section['name'];

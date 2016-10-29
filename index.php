@@ -2,6 +2,7 @@
 require_once('core/Controller.php');
 
 $vars = $_GET;
+$request = $_REQUEST;
 
 $controller = 'home';
 $action = 'index';
@@ -14,8 +15,12 @@ if(isset($vars['p'])){
 	}
 }
 
-echo $controller . '/' . $action . '<br /><hr />';
-
 require_once('app/controllers/HomeController.php');
 $controller = new app\controllers\HomeController();
-$controller->index();
+$controller->index($request);
+
+?>
+
+<form method="POST" action="">
+	<input type="submit" name="submit" value="Submit" />
+</form>
