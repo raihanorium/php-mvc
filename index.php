@@ -18,9 +18,4 @@ if(isset($vars['p'])){
 require_once('app/controllers/HomeController.php');
 $controller = new app\controllers\HomeController();
 $controller->index($request);
-
 ?>
-
-<form method="POST" action="">
-	<input type="submit" name="submit" value="Submit" />
-</form>

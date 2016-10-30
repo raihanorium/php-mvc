@@ -1,4 +1,7 @@
 <html>
 	<layout>loginlayout</layout>
-	Login
+	
+	<layoutsection name="body">
+		Login form
+	</layoutsection>
 </html>
