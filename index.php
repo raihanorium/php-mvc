@@ -15,7 +15,9 @@ if(isset($vars['p'])){
 	}
 }
 
-require_once('app/controllers/HomeController.php');
-$controller = new app\controllers\HomeController();
-$controller->index($request);
+$controllerFileName = ucfirst($controller) . 'Controller';
+require_once('app/controllers/' . $controllerFileName . '.php');
+$controllerClassPath = 'app\\controllers\\' . $controllerFileName;
+$controller = new $controllerClassPath;
+$controller->$action($request);
 ?>
