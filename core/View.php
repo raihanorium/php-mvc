@@ -33,13 +33,20 @@ class View{
 		$templateOutput = ob_get_clean();
 
 		$LAYOUT_SECTION = array();
-		$arr = simplexml_load_string($templateOutput)->layoutsection;
+		$xmlNodes = simplexml_load_string($templateOutput);
+		$arr = $xmlNodes->layoutsection;
 		foreach ($arr as $section) {
 			$key = (string)$section['name'];
 			$value = $section;
 			$LAYOUT_SECTION[$key] = $value;
 		}
 
-		require_once('app/views/layout.php');
+		$layoutName = $xmlNodes->layout;
+		
+		if($layoutName){
+			require_once('app/views/' . $layoutName . '.php');
+		} else{
+			require_once('app/views/layout.php');
+		}
 	}
 }
