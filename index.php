@@ -1,5 +1,10 @@
 <?php
 require_once('core/Controller.php');
+require_once('core/Security.php');
+
+use core\Security;
+
+if(!isset($_SESSION)) session_start();
 
 $vars = $_GET;
 $request = $_REQUEST;
@@ -23,7 +28,11 @@ if(file_exists($controllerFilePath)) {
     $controller = new $controllerClassPath;
 
     if(method_exists($controller, $action)) {
-        $controller->$action($request);
+        if(Security::checkPermission($controllerClassPath, $action)){
+            $controller->$action($request);
+        } else{
+            echo '<h1>403: Unauthorized!</h1>';
+        }
     } else{
         render404();
     }
