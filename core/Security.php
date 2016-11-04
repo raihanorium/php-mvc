@@ -1,10 +1,6 @@
 <?php
 namespace core;
 
-require_once 'lib/DocBlockReader/Reader.php';
-
-use \DocBlockReader\Reader;
-
 abstract class Security {
     private static function getClassAnnotations($class) {
         $doc = new \ReflectionClass($class);
@@ -35,7 +31,7 @@ abstract class Security {
         if(isset($_SESSION['LOGGED_IN_USER'])){
             $userRoles = $_SESSION['LOGGED_IN_USER']['roles'];
         }else{
-            throw new \Exception('User not logged in');
+            throw new UserNotLoggedInException('User not logged in');
         }
 
         return $userRoles;
@@ -62,7 +58,7 @@ abstract class Security {
     public static function checkPermission($controllerClass, $action){
         $matchedRoles = array();
         $actionRoles = self::getRolesInAction($controllerClass, $action);
-        var_export($actionRoles);
+
         if ($actionRoles) {
             $userRoles = self::getUserRoles();
             $matchedRoles = array_intersect($actionRoles, $userRoles);

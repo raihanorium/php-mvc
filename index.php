@@ -1,6 +1,7 @@
 <?php
 require_once('core/Controller.php');
 require_once('core/Security.php');
+require_once('core/UserNotLoggedInException.php');
 
 use core\Security;
 
@@ -28,10 +29,15 @@ if(file_exists($controllerFilePath)) {
     $controller = new $controllerClassPath;
 
     if(method_exists($controller, $action)) {
-        if(Security::checkPermission($controllerClassPath, $action)){
-            $controller->$action($request);
-        } else{
-            echo '<h1>403: Unauthorized!</h1>';
+        try {
+            if (Security::checkPermission($controllerClassPath, $action)) {
+                $controller->$action($request);
+            } else {
+                echo '<h1>403: Unauthorized!</h1>';
+            }
+        } catch (\core\UserNotLoggedInException $ex){
+            header("Location: ./?p=login");
+            die();
         }
     } else{
         render404();
