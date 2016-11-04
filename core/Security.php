@@ -42,23 +42,38 @@ abstract class Security {
     }
 
     public static function getRolesInController($controllerClass){
+        $ann = array();
         $ann = Security::getClassAnnotations($controllerClass);
-        return Security::getRolesByHasAnyRole($ann[0]);
+        if($ann){
+            return Security::getRolesByHasAnyRole($ann[0]);
+        }
+        return $ann;
     }
 
     public static function getRolesInAction($controllerClass, $actionMethod){
+        $ann = array();
         $ann = Security::getMethodAnnotations($controllerClass, $actionMethod);
-        return Security::getRolesByHasAnyRole($ann[0]);
+        if($ann){
+            return Security::getRolesByHasAnyRole($ann[0]);
+        }
+        return $ann;
     }
 
     public static function checkPermission($controllerClass, $action){
-        $userRoles = self::getUserRoles();
+        $matchedRoles = array();
         $actionRoles = self::getRolesInAction($controllerClass, $action);
+        var_export($actionRoles);
         if ($actionRoles) {
+            $userRoles = self::getUserRoles();
             $matchedRoles = array_intersect($actionRoles, $userRoles);
         } else {
             $controllerRoles = self::getRolesInController($controllerClass);
-            $matchedRoles = array_intersect($controllerRoles, $userRoles);
+            if($controllerRoles){
+                $userRoles = self::getUserRoles();
+                $matchedRoles = array_intersect($controllerRoles, $userRoles);
+            } else{
+                return true;
+            }
         }
 
         return $matchedRoles;
