@@ -4,7 +4,7 @@
 	<layoutsection name="body">
 		<div class="panel panel-primary" style="margin-top: 100px;">
 			<div class="panel-heading">
-				<h3 class="panel-title">Login</h3>
+				<h3 class="panel-title"><span class="glyphicon glyphicon-log-in"></span> Login</h3>
 			</div>
 			<div class="panel-body">
 				<form action="?p=login&a=login" method="POST" role="form">

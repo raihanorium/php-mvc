@@ -8,6 +8,7 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="static/css/style.css">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,5 +26,6 @@
 		<script src="static/jquery/jquery-3.1.1.min.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="static/bootstrap/js/bootstrap.min.js"></script>
+		<script src="static/js/script.js"></script>
 	</body>
 </html>
