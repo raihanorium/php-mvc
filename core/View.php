@@ -37,7 +37,7 @@ class View{
 		$arr = $xmlNodes->layoutsection;
 		foreach ($arr as $section) {
 			$key = (string)$section['name'];
-			$value = $section;
+			$value = $this->SimpleXMLElement_innerXML($section);
 			$LAYOUT_SECTION[$key] = $value;
 		}
 
@@ -49,4 +49,13 @@ class View{
 			require_once('app/views/layout.php');
 		}
 	}
+
+    private function SimpleXMLElement_innerXML($xml) {
+        $innerXML= '';
+        foreach (dom_import_simplexml($xml)->childNodes as $child)
+        {
+            $innerXML .= $child->ownerDocument->saveXML( $child );
+        }
+        return $innerXML;
+    }
 }
