@@ -21,7 +21,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
+		<div class="col-sm-4 col-sm-offset-4">
 			<?php echo $LAYOUT_SECTION['body']; ?>
 		</div>
 	</div>

@@ -10,7 +10,7 @@ class View{
 	}
 
 	public function render($value){
-		echo $value;
+		print_r($value);
 	}
 
 	public function renderTemplate($model = null){
@@ -32,12 +32,19 @@ class View{
 		include $viewPath;
 		$templateOutput = ob_get_clean();
 
+        // escape ampersand character for xml
+        $templateOutput = str_replace('&', '&amp;', $templateOutput);
+
 		$LAYOUT_SECTION = array();
 		$xmlNodes = simplexml_load_string($templateOutput);
 		$arr = $xmlNodes->layoutsection;
 		foreach ($arr as $section) {
 			$key = (string)$section['name'];
 			$value = $this->SimpleXMLElement_innerXML($section);
+
+            // return the escaped ampersand to & character
+            $value = str_replace('&amp;', '&', $value);
+
 			$LAYOUT_SECTION[$key] = $value;
 		}
 
