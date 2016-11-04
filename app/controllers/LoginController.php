@@ -12,4 +12,8 @@ class LoginController extends Controller {
     public function login($request) {
         Security::login($request['userName'], $request['password']);
     }
+
+    public function logout($request) {
+        Security::logout();
+    }
 }

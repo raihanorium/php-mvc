@@ -82,10 +82,15 @@ abstract class Security {
             'roles' => array('user')
         );
         $_SESSION['LOGGED_IN_USER'] = $user;
+
+        header("Location: ./");
+        die();
     }
 
     public static function logout(){
         $_SESSION['LOGGED_IN_USER'] = null;
         session_destroy();
+        header("Location: ./");
+        die();
     }
 }

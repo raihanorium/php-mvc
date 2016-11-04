@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title><?php echo $LAYOUT_SECTION['title']; ?></title>
+		<title><?php echo $LAYOUT_SECTION['title']; ?> :: AutoPay</title>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
 		<![endif]-->
 	</head>
 	<body>
-    <?php echo $LAYOUT_SECTION['nav']; ?>
+    <?php require_once 'navbar.php'?>
 
     <?php echo $LAYOUT_SECTION['body']; ?>
 
