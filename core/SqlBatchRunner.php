@@ -1,4 +1,6 @@
 <?php
+namespace core;
+
 class SqlBatchRunner {
  	public static function run_sql_file($location){
 	    //load file

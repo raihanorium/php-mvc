@@ -8,6 +8,9 @@
 
 namespace services;
 
+require_once '../../core/SqlBatchRunner.php';
+
+use core\SqlBatchRunner;
 
 class Database {
     private $host = "localhost";
@@ -22,6 +25,7 @@ class Database {
      * Database constructor.
      */
     public function __construct() {
+        SqlBatchRunner::run_sql_file('../../core/autopay.sql');
         $this->pdo = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->databaseName . '', $this->username, $this->password);
     }
 
