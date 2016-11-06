@@ -79,7 +79,7 @@ abstract class Security {
         $user = array(
             'email' => $email,
             'password' => $password,
-            'roles' => array('user')
+            'roles' => array('admin')
         );
         $_SESSION['LOGGED_IN_USER'] = $user;
 

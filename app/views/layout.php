@@ -20,7 +20,9 @@
 	<body>
     <?php require_once 'navbar.php'?>
 
-    <?php echo $LAYOUT_SECTION['body']; ?>
+    <div class="container">
+		<?php echo $LAYOUT_SECTION['body']; ?>
+	</div>
 
 		<!-- jQuery -->
 		<script src="static/jquery/jquery-3.1.1.min.js"></script>

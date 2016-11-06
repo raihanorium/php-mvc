@@ -19,7 +19,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resellers <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Add Reseller</a></li>
-                        <li><a href="#">List All</a></li>
+                        <li><a href="?p=reseller">List All</a></li>
                     </ul>
                 </li>
 			</ul>
