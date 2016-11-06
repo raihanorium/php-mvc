@@ -8,14 +8,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="">AutoPay</a>
+			<a class="navbar-brand" href=".">AutoPay</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="">Home</a></li>
-                <li class="dropdown">
+				<li <?php if (isset($_GET['p'])) { echo ($_GET['p'] == 'home') ? 'class="active"' : ''; } else { echo 'class="active"'; }?>><a href=".">Home</a></li>
+                <li class="dropdown <?php echo ($_GET['p'] == 'reseller')? 'active':''; ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resellers <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Add Reseller</a></li>
