@@ -5,7 +5,7 @@
         <div class="panel-heading">Resellers</div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-condensed table-striped">
+                <table class="table table-bordered table-condensed table-striped table-hover">
                     <thead>
                     <tr>
                         <th>ID</th> <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Active</th>

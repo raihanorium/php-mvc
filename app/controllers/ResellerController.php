@@ -22,4 +22,8 @@ class ResellerController extends Controller {
         );
         $this->view->renderTemplate($resellers);
     }
+
+    public function add() {
+        $this->view->renderTemplate();
+    }
 }
