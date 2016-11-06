@@ -15,7 +15,7 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li <?php if (isset($_GET['p'])) { echo ($_GET['p'] == 'home') ? 'class="active"' : ''; } else { echo 'class="active"'; }?>><a href=".">Home</a></li>
-                <li class="dropdown <?php echo ($_GET['p'] == 'reseller')? 'active':''; ?>">
+                <li class="dropdown <?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'reseller') ? 'active' : '';} ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resellers <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="?p=reseller&a=add">Add Reseller</a></li>
