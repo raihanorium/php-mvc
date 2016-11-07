@@ -37,13 +37,13 @@
                     <fieldset>
                         <legend>Services</legend>
                         <div class="checkbox">
-                            <label><input type="checkbox" value="flexiload" />FlexiLoad</label>
+                            <label><input type="checkbox" name="services[]" value="flexiload" />FlexiLoad</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" value="bkash" />bKash</label>
+                            <label><input type="checkbox" name="services[]" value="bkash" />bKash</label>
                         </div>
                         <div class="checkbox">
-                            <label><input type="checkbox" value="rocket" />Rocket</label>
+                            <label><input type="checkbox" name="services[]" value="rocket" />Rocket</label>
                         </div>
                     </fieldset>
                 </div>
