@@ -43,7 +43,7 @@ final class Database {
                 array_push($allData, $user);
             }
         } catch (\Exception $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw $e;
         }
 
         return $allData;
@@ -59,17 +59,15 @@ final class Database {
             # Affected Rows?
             return $stmt->rowCount();
         } catch (\Exception $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw $e;
         }
-
-        return -1;
     }
 
     public function execute($sql){
         try{
             $this->pdo->exec($sql);
         } catch (\Exception $e){
-            echo 'Error: ' . $e->getMessage();
+            throw $e;
         }
     }
 }
