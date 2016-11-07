@@ -39,6 +39,10 @@ final class ResellerService {
         if($this->isUsernameExists($reseller->username)){
             throw new GlobalException('Username already exists');
         }
+        if($this->isEmailExists($reseller->email)){
+            throw new GlobalException('Email already exists');
+        }
+
         return $this->db->updateQuery(
             ApplicationConstants::ADD_RESELLER,
             array(
@@ -53,6 +57,11 @@ final class ResellerService {
 
     private function isUsernameExists($username) {
         $resellers = $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_USERNAME, array(':username' => $username), Reseller::class);
+        return (sizeof($resellers) > 0);
+    }
+
+    private function isEmailExists($email) {
+        $resellers = $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_EMAIL, array(':email' => $email), Reseller::class);
         return (sizeof($resellers) > 0);
     }
 }

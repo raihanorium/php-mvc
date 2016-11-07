@@ -26,4 +26,5 @@ interface ApplicationConstants {
     const GET_ALL_RESELLERS = "SELECT * FROM `reseller`";
     const ADD_RESELLER = "INSERT INTO reseller(full_name, username, email, password, is_active) VALUES (:full_name, :username, :email, :password, :is_active)";
     const SELECT_RESELLER_BY_USERNAME = "SELECT * FROM reseller WHERE `username`=:username";
+    const SELECT_RESELLER_BY_EMAIL = "SELECT * FROM reseller WHERE `email`=:email";
 }

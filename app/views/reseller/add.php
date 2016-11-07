@@ -8,17 +8,20 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" name="full_name" placeholder="Full Name" />
+                        <input type="text" class="form-control" id="fullName" name="full_name" placeholder="Full Name"
+                            value="<?php echo isset($model['full_name']) ? $model['full_name'] : '' ?>" />
                     </div>
 
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                               value="<?php echo isset($model['username']) ? $model['username'] : '' ?>" />
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                               value="<?php echo isset($model['email']) ? $model['email'] : '' ?>" />
                     </div>
 
                     <div class="form-group">

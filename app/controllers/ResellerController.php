@@ -36,8 +36,14 @@ class ResellerController extends Controller {
         $reseller->password = $request['password'];
         $reseller->is_active = isset($request['is_active']);
 
-        if($this->resellerService->create($reseller) > 0){
-            header("Location: ./?p=reseller");
+        try {
+            $result = $this->resellerService->create($reseller);
+            if($result > 0){
+                header("Location: ./?p=reseller");
+            }
+        } catch (\Exception $ex){
+            $request['error'] = $ex->getMessage();
+            $this->view->renderView('reseller/add', $request);
         }
     }
 }
