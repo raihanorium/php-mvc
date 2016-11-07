@@ -24,11 +24,11 @@
                             <span class="glyphicon glyphicon-<?php echo $reseller->is_active? 'check' : 'unchecked'; ?>"></span>
                         </td>
                         <td class="text-center">
-                            <a href="?p=reseller&a=edit&id=<?php echo $reseller->id; ?>" title="Edit">
+                            <a class="btn btn-xs btn-info" href="?p=reseller&a=edit&id=<?php echo $reseller->id; ?>" title="Edit">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
 
-                            <a class="text-danger" href="?p=reseller&a=delete&id=<?php echo $reseller->id; ?>"
+                            <a class="btn btn-xs btn-danger" href="?p=reseller&a=delete&id=<?php echo $reseller->id; ?>"
                                title="Delete" onclick="return confirm('Are you sure you want to delete?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
