@@ -55,6 +55,19 @@ final class ResellerService {
         );
     }
 
+    public function delete($id){
+        $reseller = $this->get($id);
+        if(!$reseller){
+            throw new GlobalException('Reseller not found');
+        }
+
+        return $this->db->updateQuery(ApplicationConstants::DELETE_RESELLER, array(':id' => $id));
+    }
+
+    private function get($id) {
+        return $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_ID, array(':id' => $id), Reseller::class);
+    }
+
     private function isUsernameExists($username) {
         $resellers = $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_USERNAME, array(':username' => $username), Reseller::class);
         return (sizeof($resellers) > 0);

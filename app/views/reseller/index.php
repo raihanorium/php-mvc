@@ -10,16 +10,16 @@
                 <table class="table table-bordered table-condensed table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th> <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Active</th> <th></th>
+                        <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Created At</th> <th>Active</th> <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($model as $reseller): ?>
+                    <?php foreach ($model['resellers'] as $reseller): ?>
                     <tr>
-                        <td><?php echo $reseller->id; ?></td>
                         <td><?php echo $reseller->full_name; ?></td>
                         <td><?php echo $reseller->username; ?></td>
                         <td><?php echo $reseller->email; ?></td>
+                        <td><?php echo $reseller->created_at; ?></td>
                         <td class="text-center">
                             <span class="glyphicon glyphicon-<?php echo $reseller->is_active? 'check' : 'unchecked'; ?>"></span>
                         </td>

@@ -20,8 +20,8 @@ class ResellerController extends Controller {
     }
 
     public function index($request) {
-        $resellers = $this->resellerService->getAll();
-        $this->view->renderTemplate($resellers);
+        $request['resellers'] = $this->resellerService->getAll();
+        $this->view->renderTemplate($request);
     }
 
     public function add() {
@@ -44,6 +44,18 @@ class ResellerController extends Controller {
         } catch (\Exception $ex){
             $request['error'] = $ex->getMessage();
             $this->view->renderView('reseller/add', $request);
+        }
+    }
+
+    public function delete($request){
+        try {
+            $result = $this->resellerService->delete($request['id']);
+            if($result > 0){
+                header("Location: ./?p=reseller");
+            }
+        } catch (\Exception $ex){
+            $request['error'] = $ex->getMessage();
+            $this->index($request);
         }
     }
 }
