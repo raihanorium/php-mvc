@@ -64,4 +64,12 @@ final class Database {
 
         return -1;
     }
+
+    public function execute($sql){
+        try{
+            $this->pdo->exec($sql);
+        } catch (\Exception $e){
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
 }
