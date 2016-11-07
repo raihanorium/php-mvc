@@ -12,7 +12,7 @@ require_once '../../core/SqlBatchRunner.php';
 
 use core\SqlBatchRunner;
 
-class Database {
+final class Database {
     private $host = "localhost";
     private $username = "root";
     private $password = "";
@@ -24,9 +24,17 @@ class Database {
     /**
      * Database constructor.
      */
-    public function __construct() {
+    private function __construct() {
         SqlBatchRunner::run_sql_file('../../core/autopay.sql');
         $this->pdo = new \PDO('mysql:host=' . $this->host . ';dbname=' . $this->databaseName . '', $this->username, $this->password);
+    }
+
+    public static function Instance() {
+        static $inst = null;
+        if ($inst === null) {
+            $inst = new Database();
+        }
+        return $inst;
     }
 
     public function selectQuery($query, $parameters, $class) {

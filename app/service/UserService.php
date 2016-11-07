@@ -18,7 +18,7 @@ class UserService {
             throw new \Exception('User is not an instance of class');
         }
 
-        $db = new Database();
+        $db = Database::Instance();
         $db->updateQuery(
             "INSERT INTO user(username, email, full_name, password) VALUES (:username, :email, :full_name, :password)",
             array(
@@ -31,12 +31,12 @@ class UserService {
     }
 
     public function getAll() {
-        $db = new Database();
+        $db = Database::Instance();
         return $db->selectQuery("SELECT * FROM user", null, User::class);
     }
 
     public function get($id) {
-        $db = new Database();
+        $db = Database::Instance();
         return $db->selectQuery("SELECT * FROM user WHERE id = :id", array(':id' => $id), User::class);
     }
 }
