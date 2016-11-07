@@ -18,8 +18,8 @@
                 <li class="dropdown <?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'reseller') ? 'active' : '';} ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resellers <b class="caret"></b></a>
                     <ul class="dropdown-menu">
+						<li><a href="?p=reseller">List All</a></li>
                         <li><a href="?p=reseller&a=add">Add Reseller</a></li>
-                        <li><a href="?p=reseller">List All</a></li>
                     </ul>
                 </li>
 			</ul>

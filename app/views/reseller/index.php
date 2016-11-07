@@ -4,11 +4,13 @@
     <div class="panel panel-info">
         <div class="panel-heading">Resellers</div>
         <div class="panel-body">
+            <a href="?p=reseller&a=add" class="btn btn-warning pull-right">Add New Reseller</a> <br /><br />
+
             <div class="table-responsive">
                 <table class="table table-bordered table-condensed table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th> <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Active</th>
+                        <th>ID</th> <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Active</th> <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -18,7 +20,19 @@
                         <td><?php echo $reseller['full_name']; ?></td>
                         <td><?php echo $reseller['username']; ?></td>
                         <td><?php echo $reseller['email']; ?></td>
-                        <td><?php echo $reseller['is_active']; ?></td>
+                        <td class="text-center">
+                            <span class="glyphicon glyphicon-<?php echo $reseller['is_active']? 'check' : 'unchecked'; ?>"></span>
+                        </td>
+                        <td class="text-center">
+                            <a href="?p=reseller&a=edit&id=<?php echo $reseller['id']; ?>" title="Edit">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+
+                            <a class="text-danger" href="?p=reseller&a=delete&id=<?php echo $reseller['id']; ?>"
+                               title="Delete" onclick="return confirm('Are you sure you want to delete?')">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>

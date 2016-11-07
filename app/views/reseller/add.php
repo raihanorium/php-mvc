@@ -28,7 +28,7 @@
 
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="isActive" name="is_active" /> Active
+                            <input type="checkbox" id="isActive" name="is_active" checked="checked" /> Active
                         </label>
                     </div>
                 </div>
@@ -50,8 +50,9 @@
 
                 <div class="clearfix"></div>
 
-                <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary pull-right">Add</button>
+                <div class="col-sm-12 text-right">
+                    <a href="?p=reseller" class="btn btn-default">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>
