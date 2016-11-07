@@ -55,6 +55,18 @@ final class ResellerService {
         );
     }
 
+    public function update($reseller){
+        return $this->db->updateQuery(
+            ApplicationConstants::UPDATE_RESELLER,
+            array(
+                ':id' => $reseller->id,
+                ':full_name' => $reseller->full_name,
+                ':password' => $reseller->password,
+                ':is_active' => $reseller->is_active
+            )
+        );
+    }
+
     public function delete($id){
         $reseller = $this->get($id);
         if(!$reseller){
@@ -64,7 +76,7 @@ final class ResellerService {
         return $this->db->updateQuery(ApplicationConstants::DELETE_RESELLER, array(':id' => $id));
     }
 
-    private function get($id) {
+    public function get($id) {
         return $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_ID, array(':id' => $id), Reseller::class);
     }
 

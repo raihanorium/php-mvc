@@ -24,7 +24,9 @@ interface ApplicationConstants {
           UNIQUE `email_unique` (`email`)) ENGINE = InnoDB;
         ";
     const GET_ALL_RESELLERS = "SELECT * FROM `reseller`";
-    const ADD_RESELLER = "INSERT INTO reseller(full_name, username, email, password, is_active) VALUES (:full_name, :username, :email, :password, :is_active)";
+    const ADD_RESELLER = "INSERT INTO reseller(full_name, username, email, password, is_active)
+                          VALUES (:full_name, :username, :email, :password, :is_active)";
+    const UPDATE_RESELLER = "UPDATE `reseller` SET `full_name`=:full_name, `password`=:password, `is_active`=:is_active WHERE `id`=:id";
     const SELECT_RESELLER_BY_USERNAME = "SELECT * FROM reseller WHERE `username`=:username";
     const SELECT_RESELLER_BY_EMAIL = "SELECT * FROM reseller WHERE `email`=:email";
     const SELECT_RESELLER_BY_ID = "SELECT * FROM reseller WHERE `id`=:id";

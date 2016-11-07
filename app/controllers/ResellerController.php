@@ -5,6 +5,7 @@ require_once 'app/service/ResellerService.php';
 require_once 'app/model/Reseller.php';
 
 use core\Controller;
+use core\GlobalException;
 use model\Reseller;
 use services\ResellerService;
 
@@ -28,6 +29,25 @@ class ResellerController extends Controller {
         $this->view->renderTemplate();
     }
 
+    public function edit($request) {
+        try {
+            $result = $this->resellerService->get($request['id']);
+            if($result){
+                $result = $result[0];
+                $request['full_name'] = $result->full_name;
+                $request['username'] = $result->username;
+                $request['email'] = $result->email;
+                $request['is_active'] = $result->is_active;
+                $this->view->renderTemplate($request);
+            } else {
+                throw new GlobalException('Reseller not found');
+            }
+        } catch (\Exception $ex){
+            $request['error'] = $ex->getMessage();
+            $this->index($request);
+        }
+    }
+
     public function save($request){
         $reseller = new Reseller();
         $reseller->full_name = $request['full_name'];
@@ -38,6 +58,25 @@ class ResellerController extends Controller {
 
         try {
             $result = $this->resellerService->create($reseller);
+            if($result > 0){
+                header("Location: ./?p=reseller");
+            }
+        } catch (\Exception $ex){
+            $request['error'] = $ex->getMessage();
+            $this->view->renderView('reseller/add', $request);
+        }
+    }
+
+    public function update($request){
+        $reseller = $this->resellerService->get($request['id'])[0];
+        $reseller->full_name = $request['full_name'];
+        $reseller->is_active = isset($request['is_active']);
+        if(strlen($request['password']) > 0){
+            $reseller->password = $request['password'];
+        }
+
+        try {
+            $result = $this->resellerService->update($reseller);
             if($result > 0){
                 header("Location: ./?p=reseller");
             }
