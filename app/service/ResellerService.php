@@ -31,7 +31,6 @@ final class ResellerService {
     }
 
     public function getAll(){
-        $resellers = $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLERS, array(), Reseller::class);
-        return $resellers;
+        return $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLERS, array(), Reseller::class);
     }
 }
