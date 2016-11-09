@@ -17,6 +17,7 @@ interface ApplicationConstants {
           `username` VARCHAR(255) NOT NULL ,
           `email` VARCHAR(255) NOT NULL ,
           `password` VARCHAR(64) NOT NULL ,
+          `role` INT NOT NULL DEFAULT 2,
           `is_active` BOOLEAN NOT NULL DEFAULT FALSE ,
           `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
           PRIMARY KEY (`id`),

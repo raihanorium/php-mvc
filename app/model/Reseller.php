@@ -15,6 +15,7 @@ class Reseller {
     public $username;
     public $email;
     public $password;
+    public $role; // 1=Admin, 2=Reseller
     public $is_active;
     public $created_at;
 }
