@@ -70,8 +70,6 @@ class ResellerController extends Controller {
     }
 
     public function update($request){
-        // TODO: no ui if saved without any change
-
         $reseller = $this->resellerService->get($request['id'])[0];
         $reseller->full_name = $request['full_name'];
         $reseller->is_active = isset($request['is_active']);
@@ -81,9 +79,7 @@ class ResellerController extends Controller {
 
         try {
             $result = $this->resellerService->update($reseller);
-            if($result > 0){
-                header("Location: ./?p=reseller");
-            }
+            header("Location: ./?p=reseller");
         } catch (\Exception $ex){
             $request['error'] = $ex->getMessage();
             $this->view->renderView('reseller/add', $request);
