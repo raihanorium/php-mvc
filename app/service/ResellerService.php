@@ -90,4 +90,9 @@ final class ResellerService {
         $resellers = $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_EMAIL, array(':email' => $email), Reseller::class);
         return (sizeof($resellers) > 0);
     }
+
+    public function getByUsernameAndPassword($username, $password) {
+        return $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_USERNAME_PASSWORD,
+            array(':username' => $username, ':password' => $password), Reseller::class);
+    }
 }

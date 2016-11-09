@@ -1,6 +1,10 @@
 <?php
 namespace core;
 
+require_once 'app/service/ResellerService.php';
+
+use services\ResellerService;
+
 abstract class Security {
     private static function getClassAnnotations($class) {
         $doc = new \ReflectionClass($class);
@@ -76,15 +80,35 @@ abstract class Security {
     }
 
     public static function login($email, $password){
-        $user = array(
-            'email' => $email,
-            'password' => $password,
-            'roles' => array('admin')
-        );
-        $_SESSION['LOGGED_IN_USER'] = $user;
+        $resellerService = ResellerService::Instance();
+        $user = $resellerService->getByUsernameAndPassword($email, $password);
+        if($user){
+            $user = $user[0];
+            $user = (array)$user;
 
-        header("Location: ./");
-        die();
+            $roles = array();
+            switch ($user['role']){
+                case 1:
+                    array_push($roles, 'reseller');
+                    array_push($roles, 'admin');
+                    break;
+                case 2:
+                    array_push($roles, 'reseller');
+                    break;
+                default:
+                    array_push($roles, 'reseller');
+                    break;
+            }
+            $user['roles'] = $roles;
+
+            print_r($user);
+            $_SESSION['LOGGED_IN_USER'] = $user;
+
+            header("Location: ./");
+            die();
+        } else{
+            throw new GlobalException('Login failed');
+        }
     }
 
     public static function logout(){
