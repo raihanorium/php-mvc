@@ -28,7 +28,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span>
-                        <?php echo $_SESSION['LOGGED_IN_USER']['email']; ?>
+                        <?php echo $_SESSION['LOGGED_IN_USER']['full_name']; ?>
                         <b class="caret"></b>
                     </a>
 					<ul class="dropdown-menu">

@@ -4,7 +4,7 @@ namespace app\controllers;
 use core\Controller;
 
 /**
- * @hasAnyRole(user, admin)
+ * @hasAnyRole(reseller, admin)
  */
 class HomeController extends Controller {
     public function index($request) {
