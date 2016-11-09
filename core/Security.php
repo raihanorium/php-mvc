@@ -86,6 +86,10 @@ abstract class Security {
             $user = $user[0];
             $user = (array)$user;
 
+            if(! $user['is_active']){
+                throw new LoginFailedException('This account is disabled. Please contact your Administrator.');
+            }
+
             $roles = array();
             switch ($user['role']){
                 case 1:
