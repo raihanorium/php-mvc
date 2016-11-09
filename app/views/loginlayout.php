@@ -20,6 +20,13 @@
 
 
 <div class="container-fluid">
+    <?php if(isset($model['error'])): ?>
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error!</strong> <?php echo $model['error']; ?>
+        </div>
+    <?php endif; ?>
+
 	<div class="row">
 		<div class="col-sm-4 col-sm-offset-4">
 			<?php echo $LAYOUT_SECTION['body']; ?>

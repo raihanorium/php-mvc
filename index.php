@@ -3,6 +3,7 @@ require_once('core/Controller.php');
 require_once('core/Security.php');
 require_once('core/UserNotLoggedInException.php');
 require_once('core/GlobalException.php');
+require_once('core/LoginFailedException.php');
 
 use core\Security;
 
@@ -36,6 +37,9 @@ if(file_exists($controllerFilePath)) {
                     $controller->$action($request);
                 } catch (\core\GlobalException $ex){
                     echo($ex->getMessage());
+                } catch (\core\LoginFailedException $ex){
+                    $request['error'] = $ex->getMessage();
+                    $controller->index($request);
                 }
             } else {
                 echo '<h1>403: Unauthorized!</h1>';

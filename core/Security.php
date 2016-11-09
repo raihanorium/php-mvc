@@ -107,7 +107,7 @@ abstract class Security {
             header("Location: ./");
             die();
         } else{
-            throw new GlobalException('Login failed');
+            throw new LoginFailedException('Login failed');
         }
     }
 
