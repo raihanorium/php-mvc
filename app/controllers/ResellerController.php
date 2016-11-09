@@ -70,6 +70,8 @@ class ResellerController extends Controller {
     }
 
     public function update($request){
+        // TODO: no ui if saved without any change
+
         $reseller = $this->resellerService->get($request['id'])[0];
         $reseller->full_name = $request['full_name'];
         $reseller->is_active = isset($request['is_active']);
