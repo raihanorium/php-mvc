@@ -50,6 +50,7 @@ final class ResellerService {
                 ':username' => $reseller->username,
                 ':email' => $reseller->email,
                 ':password' => $reseller->password,
+                ':role' => $reseller->role,
                 ':is_active' => $reseller->is_active
             )
         );

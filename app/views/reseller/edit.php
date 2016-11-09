@@ -30,6 +30,15 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
                     </div>
 
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select name="role" id="role" class="form-control" disabled="disabled">
+                            <option value="">-- Select Role --</option>
+                            <option value="1" <?php echo isset($model['role']) ? ($model['role'] == 1)? 'selected="selected"' : '' : '' ?>>Admin</option>
+                            <option value="2" <?php echo isset($model['role']) ? ($model['role'] == 2)? 'selected="selected"' : '' : '' ?>>Reseller</option>
+                        </select>
+                    </div>
+
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="isActive" name="is_active"

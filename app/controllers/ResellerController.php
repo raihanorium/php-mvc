@@ -37,6 +37,7 @@ class ResellerController extends Controller {
                 $request['full_name'] = $result->full_name;
                 $request['username'] = $result->username;
                 $request['email'] = $result->email;
+                $request['role'] = $result->role;
                 $request['is_active'] = $result->is_active;
                 $this->view->renderTemplate($request);
             } else {
@@ -54,6 +55,7 @@ class ResellerController extends Controller {
         $reseller->username = $request['username'];
         $reseller->email = $request['email'];
         $reseller->password = $request['password'];
+        $reseller->role = $request['role'];
         $reseller->is_active = isset($request['is_active']);
 
         try {
