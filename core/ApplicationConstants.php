@@ -56,5 +56,6 @@ interface ApplicationConstants {
         INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Rocket', NULL, NULL);
     ";
     const GET_ALL_SERVICES = "SELECT * FROM `service`";
+    const GET_ALL_ACTIVE_SERVICES = "SELECT * FROM `service` WHERE `is_active`=1";
     const SELECT_SERVICE_BY_ID = "SELECT * FROM `service` WHERE `id`=:id";
 }

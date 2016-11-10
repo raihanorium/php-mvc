@@ -48,15 +48,12 @@
                 <div class="col-sm-6">
                     <fieldset>
                         <legend>Services</legend>
+
+                        <?php foreach ($model['services'] as $service) : ?>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="services[]" value="flexiload" />FlexiLoad</label>
+                            <label><input type="checkbox" name="services[]" value="<?php echo $service['id']; ?>" /><?php echo $service['name']; ?></label>
                         </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="services[]" value="bkash" />bKash</label>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="services[]" value="rocket" />Rocket</label>
-                        </div>
+                        <?php endforeach; ?>
                     </fieldset>
                 </div>
 

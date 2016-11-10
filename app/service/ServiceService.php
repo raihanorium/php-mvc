@@ -37,6 +37,10 @@ final class ServiceService {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_SERVICES, array(), Service::class);
     }
 
+    public function getAllActive(){
+        return $this->db->selectQuery(ApplicationConstants::GET_ALL_ACTIVE_SERVICES, array(), Service::class);
+    }
+
     public function get($id) {
         return $this->db->selectQuery(ApplicationConstants::SELECT_SERVICE_BY_ID, array(':id' => $id), Service::class);
     }

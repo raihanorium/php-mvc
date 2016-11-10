@@ -2,21 +2,25 @@
 namespace app\controllers;
 
 require_once 'app/service/ResellerService.php';
+require_once 'app/service/ServiceService.php';
 require_once 'app/model/Reseller.php';
 
 use core\Controller;
 use core\GlobalException;
 use model\Reseller;
 use services\ResellerService;
+use services\ServiceService;
 
 /**
  * @hasAnyRole(admin)
  */
 class ResellerController extends Controller {
     private $resellerService;
+    private $serviceService;
 
     public function __construct() {
         $this->resellerService = ResellerService::Instance();
+        $this->serviceService = ServiceService::Instance();
         parent::__construct();
     }
 
@@ -25,8 +29,9 @@ class ResellerController extends Controller {
         $this->view->renderTemplate($request);
     }
 
-    public function add() {
-        $this->view->renderTemplate();
+    public function add($request) {
+        $request['services'] = $this->serviceService->getAllActive();
+        $this->view->renderTemplate($request);
     }
 
     public function edit($request) {
