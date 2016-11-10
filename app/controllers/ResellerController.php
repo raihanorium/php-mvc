@@ -35,15 +35,11 @@ class ResellerController extends Controller {
     }
 
     public function edit($request) {
+        $request['services'] = $this->serviceService->getAllActive();
         try {
             $result = $this->resellerService->get($request['id']);
             if($result){
-                $result = $result[0];
-                $request['full_name'] = $result->full_name;
-                $request['username'] = $result->username;
-                $request['email'] = $result->email;
-                $request['role'] = $result->role;
-                $request['is_active'] = $result->is_active;
+                $request['reseller'] = (array)$result;
                 $this->view->renderTemplate($request);
             } else {
                 throw new GlobalException('Reseller not found');
@@ -61,6 +57,7 @@ class ResellerController extends Controller {
         $reseller->email = $request['email'];
         $reseller->password = $request['password'];
         $reseller->role = $request['role'];
+        $reseller->services = $request['services'];
         $reseller->is_active = isset($request['is_active']);
 
         try {
@@ -69,13 +66,14 @@ class ResellerController extends Controller {
                 header("Location: ./?p=reseller");
             }
         } catch (\Exception $ex){
+            $request['services'] = $this->serviceService->getAllActive();
             $request['error'] = $ex->getMessage();
             $this->view->renderView('reseller/add', $request);
         }
     }
 
     public function update($request){
-        $reseller = $this->resellerService->get($request['id'])[0];
+        $reseller = $this->resellerService->get($request['id']);
         $reseller->full_name = $request['full_name'];
         $reseller->is_active = isset($request['is_active']);
         if(strlen($request['password']) > 0){

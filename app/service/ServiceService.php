@@ -15,6 +15,7 @@ use model\Service;
 
 require_once 'Database.php';
 require_once 'core/ApplicationConstants.php';
+require_once 'app/model/ResellerService.php';
 
 final class ServiceService {
     private $db;
@@ -43,5 +44,14 @@ final class ServiceService {
 
     public function get($id) {
         return $this->db->selectQuery(ApplicationConstants::SELECT_SERVICE_BY_ID, array(':id' => $id), Service::class);
+    }
+
+    public function getServiceIdsByResellerId($resellerId){
+        $ret = array();
+        $result = $this->db->selectQuery(ApplicationConstants::GET_SERVICES_OF_RESELLER, array(':reseller_id' => $resellerId), 'int');
+        foreach ($result as $service){
+            array_push($ret, $service['id']);
+        }
+        return $ret;
     }
 }

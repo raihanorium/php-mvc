@@ -64,4 +64,6 @@ interface ApplicationConstants {
     const GET_ALL_SERVICES = "SELECT * FROM `service`";
     const GET_ALL_ACTIVE_SERVICES = "SELECT * FROM `service` WHERE `is_active`=1";
     const SELECT_SERVICE_BY_ID = "SELECT * FROM `service` WHERE `id`=:id";
+    const ADD_RESELLER_SERVICE = "INSERT INTO `reseller_service` (`reseller_id`, `service_id`) VALUES(:reseller_id, :service_id);";
+    const GET_SERVICES_OF_RESELLER = "SELECT `service_id` AS `id` FROM `reseller_service` WHERE `reseller_id`=:reseller_id;";
 }

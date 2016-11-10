@@ -14,13 +14,16 @@ use model\Reseller;
 
 require_once 'Database.php';
 require_once 'core/ApplicationConstants.php';
+require_once 'app/service/ServiceService.php';
 
 final class ResellerService {
     private $db;
+    private $serviceService;
 
     private function __construct(){
         $this->db = Database::Instance();
         $this->db->execute(ApplicationConstants::CREATE_RESELLER_TABLE);
+        $this->serviceService = ServiceService::Instance();
     }
 
     public static function Instance(){
@@ -43,7 +46,7 @@ final class ResellerService {
             throw new GlobalException('Email already exists');
         }
 
-        return $this->db->updateQuery(
+        $result = $this->db->updateQuery(
             ApplicationConstants::ADD_RESELLER,
             array(
                 ':full_name' => $reseller->full_name,
@@ -54,6 +57,22 @@ final class ResellerService {
                 ':is_active' => $reseller->is_active
             )
         );
+
+        // add services only if role is reseller.
+        if(($result > 0) && ($reseller->role == 2)){
+            $addedReseller = $this->getByUsernameAndPassword($reseller->username, $reseller->password)[0];
+            foreach ($reseller->services as $service){
+                $this->db->updateQuery(
+                    ApplicationConstants::ADD_RESELLER_SERVICE,
+                    array(
+                        ':reseller_id' => $addedReseller->id,
+                        ':service_id' => $service
+                    )
+                );
+            }
+        }
+
+        return $result;
     }
 
     public function update($reseller){
@@ -78,7 +97,12 @@ final class ResellerService {
     }
 
     public function get($id) {
-        return $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_ID, array(':id' => $id), Reseller::class);
+        $result = $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_ID, array(':id' => $id), Reseller::class);
+        if($result) {
+            $result = $result[0];
+            $result->services = $this->serviceService->getServiceIdsByResellerId($id);
+        }
+        return $result;
     }
 
     private function isUsernameExists($username) {
