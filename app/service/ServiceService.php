@@ -54,4 +54,8 @@ final class ServiceService {
         }
         return $ret;
     }
+
+    public function deleteServicesByResellerId($resellerId){
+        return $this->db->updateQuery(ApplicationConstants::DELETE_RESELLER_SERVICE, array(':reseller_id' => $resellerId));
+    }
 }

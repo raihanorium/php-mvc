@@ -75,6 +75,7 @@ class ResellerController extends Controller {
     public function update($request){
         $reseller = $this->resellerService->get($request['id']);
         $reseller->full_name = $request['full_name'];
+        $reseller->services = $request['services'];
         $reseller->is_active = isset($request['is_active']);
         if(strlen($request['password']) > 0){
             $reseller->password = $request['password'];

@@ -76,7 +76,7 @@ final class ResellerService {
     }
 
     public function update($reseller){
-        return $this->db->updateQuery(
+        $result = $this->db->updateQuery(
             ApplicationConstants::UPDATE_RESELLER,
             array(
                 ':id' => $reseller->id,
@@ -85,6 +85,25 @@ final class ResellerService {
                 ':is_active' => $reseller->is_active
             )
         );
+
+        // add services only if role is reseller.
+        if($reseller->role == 2){
+            // delete previous associations first
+            $this->serviceService->deleteServicesByResellerId($reseller->id);
+
+            $addedReseller = $this->getByUsernameAndPassword($reseller->username, $reseller->password)[0];
+            foreach ($reseller->services as $service){
+                $this->db->updateQuery(
+                    ApplicationConstants::ADD_RESELLER_SERVICE,
+                    array(
+                        ':reseller_id' => $addedReseller->id,
+                        ':service_id' => $service
+                    )
+                );
+            }
+        }
+
+        return $result;
     }
 
     public function delete($id){
@@ -92,6 +111,9 @@ final class ResellerService {
         if(!$reseller){
             throw new GlobalException('Reseller not found');
         }
+
+        // delete service associations first
+        $this->serviceService->deleteServicesByResellerId($reseller->id);
 
         return $this->db->updateQuery(ApplicationConstants::DELETE_RESELLER, array(':id' => $id));
     }
