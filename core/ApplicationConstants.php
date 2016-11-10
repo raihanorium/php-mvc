@@ -22,7 +22,8 @@ interface ApplicationConstants {
           `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
           PRIMARY KEY (`id`),
           UNIQUE `username_unique` (`username`),
-          UNIQUE `email_unique` (`email`)) ENGINE = InnoDB;
+          UNIQUE `email_unique` (`email`))
+        ENGINE = InnoDB;
         ";
     const GET_ALL_RESELLERS = "SELECT * FROM `reseller`";
     const ADD_RESELLER = "INSERT INTO reseller(full_name, username, email, password, role, is_active)
@@ -33,4 +34,27 @@ interface ApplicationConstants {
     const SELECT_RESELLER_BY_ID = "SELECT * FROM reseller WHERE `id`=:id";
     const SELECT_RESELLER_BY_USERNAME_PASSWORD = "SELECT * FROM reseller WHERE `username`=:username AND `password`=:password";
     const DELETE_RESELLER = "DELETE FROM `reseller` WHERE `id`=:id";
+
+    const CREATE_SERVICE_TABLE = "
+        CREATE TABLE IF NOT EXISTS `service` (
+          `id` INT NOT NULL AUTO_INCREMENT ,
+          `name` VARCHAR(50) NOT NULL ,
+          `description` VARCHAR(255) NULL ,
+          `operator_code` VARCHAR(5) NULL ,
+          `is_active` BOOLEAN NOT NULL DEFAULT TRUE ,
+          PRIMARY KEY (`id`),
+          UNIQUE `name_unique` (`name`))
+        ENGINE = InnoDB;
+    ";
+    const INSERT_DEFAULT_SERVICES = "
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Grameenphone', NULL, '017');
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Robi', NULL, '018');
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Banglalink', NULL, '019');
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Airtel', NULL, '016');
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Teletalk', NULL, '015');
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('bKash', NULL, NULL);
+        INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Rocket', NULL, NULL);
+    ";
+    const GET_ALL_SERVICES = "SELECT * FROM `service`";
+    const SELECT_SERVICE_BY_ID = "SELECT * FROM `service` WHERE `id`=:id";
 }

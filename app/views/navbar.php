@@ -22,6 +22,7 @@
                         <li><a href="?p=reseller&a=add">Add Reseller</a></li>
                     </ul>
                 </li>
+				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'service') ? 'active' : '';} ?>"><a href="?p=service">Services</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
