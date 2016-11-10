@@ -14,6 +14,9 @@ require_once 'app/model/Service.php';
 use core\Controller;
 use services\ServiceService;
 
+/**
+ * @hasAnyRole(admin)
+ */
 class ServiceController extends Controller {
     private $serviceService;
 

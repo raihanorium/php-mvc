@@ -45,6 +45,12 @@ interface ApplicationConstants {
           PRIMARY KEY (`id`),
           UNIQUE `name_unique` (`name`))
         ENGINE = InnoDB;
+        
+        CREATE TABLE IF NOT EXISTS `reseller_service` (
+          `reseller_id` INT NOT NULL,
+          `service_id` INT NOT NULL,
+          CONSTRAINT `reseller_service_composite` PRIMARY KEY (`reseller_id`, `service_id`)
+        );
     ";
     const INSERT_DEFAULT_SERVICES = "
         INSERT INTO `service` (`name`, `description`, `operator_code`) VALUES ('Grameenphone', NULL, '017');
