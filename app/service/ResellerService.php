@@ -127,6 +127,17 @@ final class ResellerService {
         return $result;
     }
 
+    public function getAllServices($resellerId){
+        $serviceIds = $this->serviceService->getServiceIdsByResellerId($resellerId);
+        $services = array();
+        foreach ($serviceIds as $serviceId){
+            $service = $this->serviceService->get($serviceId);
+            array_push($services, $service[0]);
+        }
+
+        return $services;
+    }
+
     private function isUsernameExists($username) {
         $resellers = $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_USERNAME, array(':username' => $username), Reseller::class);
         return (sizeof($resellers) > 0);

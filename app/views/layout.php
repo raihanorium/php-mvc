@@ -36,5 +36,6 @@
 		<!-- Bootstrap JavaScript -->
 		<script src="static/bootstrap/js/bootstrap.min.js"></script>
 		<script src="static/js/script.js"></script>
+		<?php echo isset($LAYOUT_SECTION['script'])? $LAYOUT_SECTION['script'] : ''; ?>
 	</body>
 </html>

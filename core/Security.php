@@ -121,4 +121,9 @@ abstract class Security {
         header("Location: ./");
         die();
     }
+
+    public static function getLoggedInUser(){
+        $user = $_SESSION['LOGGED_IN_USER'];
+        return $user;
+    }
 }
