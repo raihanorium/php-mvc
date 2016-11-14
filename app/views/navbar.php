@@ -23,6 +23,7 @@
                     </ul>
                 </li>
 				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'service') ? 'active' : '';} ?>"><a href="?p=service">Services</a></li>
+				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'transaction') ? 'active' : '';} ?>"><a href="?p=transaction">Transactions</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

@@ -67,4 +67,31 @@ interface ApplicationConstants {
     const ADD_RESELLER_SERVICE = "INSERT INTO `reseller_service` (`reseller_id`, `service_id`) VALUES(:reseller_id, :service_id);";
     const DELETE_RESELLER_SERVICE = "DELETE FROM `reseller_service` WHERE`reseller_id`=:reseller_id;";
     const GET_SERVICES_OF_RESELLER = "SELECT `service_id` AS `id` FROM `reseller_service` WHERE `reseller_id`=:reseller_id;";
+
+    const CREATE_ADMIN_RESELLER_TRANSACTION_TABLE = "
+        CREATE TABLE IF NOT EXISTS `admin_reseller_transaction` ( 
+          `id` BIGINT NOT NULL AUTO_INCREMENT , 
+          `from` INT NOT NULL , 
+          `to` INT NOT NULL , 
+          `amount` DOUBLE NOT NULL , 
+          `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+          `description` VARCHAR(255) NULL , 
+          PRIMARY KEY (`id`), 
+          INDEX `from_index` (`from`), 
+          INDEX `to_index` (`to`)
+        ) ENGINE = InnoDB;";
+    const GET_ALL_TRANSACTIONS_ADMIN = "
+        SELECT
+            art.id,
+            art.from,
+            rf.full_name AS `from_name`,
+            art.to,
+            rt.full_name AS `to_name`,
+            art.amount,
+            art.created_at,
+            art.description
+        FROM `admin_reseller_transaction` art
+        INNER JOIN `reseller` rf ON(art.from=rf.id)
+        INNER JOIN `reseller` rt ON(art.to=rt.id)
+      ";
 }
