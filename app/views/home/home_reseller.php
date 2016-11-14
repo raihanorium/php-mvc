@@ -11,42 +11,58 @@
     <br />
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
+            <div class="row">
+                <h3>Your Balance: <span class="label label-success">2350.00</span> BDT</h3>
+                <br />
+            </div>
+
             <form action="">
                 <input type="hidden" name="service_id" id="subaction" />
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <label>Number</label>
-                        <input class="form-control" type="text" placeholder="Send to"/>
+                        <input class="form-control" type="text" placeholder="Send to" required="required"/>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>Amount</label>
-                        <input class="form-control" type="number" placeholder="Amount (In BDT)"/>
+                        <input class="form-control" type="number" required="required" placeholder="Amount (In BDT)"/>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-6 form-group">
                         <label>PIN</label>
-                        <input class="form-control" type="text" placeholder="Your PIN"/>
+                        <input class="form-control" type="number" required="required" placeholder="Your PIN"/>
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>&nbsp;</label>
-                        <input class="form-control btn btn-primary" type="submit" value="Send" />
+                        <input class="btn btn-lg btn-primary pull-right" type="submit" value="Send" style="margin-top: 15px;" />
                     </div>
                 </div>
             </form>
         </div>
 
-        <div class="col-sm-6">
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <label>Label1</label>
-                    <input class="form-control" type="text"/>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label>Label2</label>
-                    <input class="form-control" type="text"/>
+        <div class="col-sm-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">History</div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-condensed table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Service</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
