@@ -38,6 +38,18 @@ final class TransactionService {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_ADMIN, array(), Transaction::class);
     }
 
+    public function addAdminResellerTransaction($transaction){
+        return $this->db->updateQuery(
+            ApplicationConstants::INSERT_ADMIN_RESELLER_TRANSACTION,
+            array(
+                ':from' => $transaction->from,
+                ':to' => $transaction->to,
+                ':amount' => $transaction->amount,
+                ':description' => $transaction->description
+            )
+        );
+    }
+
 //    public function getAllActive(){
 //        return $this->db->selectQuery(ApplicationConstants::GET_ALL_ACTIVE_SERVICES, array(), Service::class);
 //    }

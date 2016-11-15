@@ -25,7 +25,8 @@ interface ApplicationConstants {
           UNIQUE `email_unique` (`email`))
         ENGINE = InnoDB;
         ";
-    const GET_ALL_RESELLERS = "SELECT * FROM `reseller`";
+    const GET_ALL_RESELLERS = "SELECT * FROM `reseller` WHERE `role`=2";
+    const GET_ALL_ACTIVE_RESELLERS = "SELECT * FROM `reseller` WHERE `role`=2 AND `is_active`=1";
     const ADD_RESELLER = "INSERT INTO reseller(full_name, username, email, password, role, is_active)
                           VALUES (:full_name, :username, :email, :password, :role, :is_active)";
     const UPDATE_RESELLER = "UPDATE `reseller` SET `full_name`=:full_name, `password`=:password, `is_active`=:is_active WHERE `id`=:id";
@@ -93,5 +94,8 @@ interface ApplicationConstants {
         FROM `admin_reseller_transaction` art
         INNER JOIN `reseller` rf ON(art.from=rf.id)
         INNER JOIN `reseller` rt ON(art.to=rt.id)
+        ORDER BY art.created_at DESC LIMIT 20
       ";
+    const INSERT_ADMIN_RESELLER_TRANSACTION = "INSERT INTO `admin_reseller_transaction`(`from`, `to`, `amount`, `description`)
+      VALUES (:from, :to, :amount, :description);";
 }

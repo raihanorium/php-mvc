@@ -38,6 +38,10 @@ final class ResellerService {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLERS, array(), Reseller::class);
     }
 
+    public function getAllActive(){
+        return $this->db->selectQuery(ApplicationConstants::GET_ALL_ACTIVE_RESELLERS, array(), Reseller::class);
+    }
+
     public function create($reseller){
         if($this->isUsernameExists($reseller->username)){
             throw new GlobalException('Username already exists');
