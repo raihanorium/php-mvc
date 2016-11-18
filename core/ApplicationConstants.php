@@ -96,6 +96,22 @@ interface ApplicationConstants {
         INNER JOIN `reseller` rt ON(art.to=rt.id)
         ORDER BY art.created_at DESC LIMIT 20
       ";
+    const GET_ALL_TRANSACTIONS_RESELLER = "
+        SELECT
+            art.id,
+            art.from,
+            rf.full_name AS `from_name`,
+            art.to,
+            rt.full_name AS `to_name`,
+            art.amount,
+            art.created_at,
+            art.description
+        FROM `admin_reseller_transaction` art
+        INNER JOIN `reseller` rf ON(art.from=rf.id)
+        INNER JOIN `reseller` rt ON(art.to=rt.id)
+        WHERE art.`to`=:to
+        ORDER BY art.created_at DESC LIMIT 20
+      ";
     const INSERT_ADMIN_RESELLER_TRANSACTION = "INSERT INTO `admin_reseller_transaction`(`from`, `to`, `amount`, `description`)
       VALUES (:from, :to, :amount, :description);";
 }

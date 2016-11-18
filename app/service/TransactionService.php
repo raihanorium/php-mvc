@@ -21,12 +21,12 @@ require_once 'app/model/ResellerService.php';
 final class TransactionService {
     private $db;
 
-    private function __construct(){
+    private function __construct() {
         $this->db = Database::Instance();
         $this->db->execute(ApplicationConstants::CREATE_ADMIN_RESELLER_TRANSACTION_TABLE);
     }
 
-    public static function Instance(){
+    public static function Instance() {
         static $inst = null;
         if ($inst === null) {
             $inst = new TransactionService();
@@ -34,11 +34,11 @@ final class TransactionService {
         return $inst;
     }
 
-    public function getAllForAdmin(){
+    public function getAllForAdmin() {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_ADMIN, array(), Transaction::class);
     }
 
-    public function addAdminResellerTransaction($transaction){
+    public function addAdminResellerTransaction($transaction) {
         return $this->db->updateQuery(
             ApplicationConstants::INSERT_ADMIN_RESELLER_TRANSACTION,
             array(
@@ -50,24 +50,7 @@ final class TransactionService {
         );
     }
 
-//    public function getAllActive(){
-//        return $this->db->selectQuery(ApplicationConstants::GET_ALL_ACTIVE_SERVICES, array(), Service::class);
-//    }
-//
-//    public function get($id) {
-//        return $this->db->selectQuery(ApplicationConstants::SELECT_SERVICE_BY_ID, array(':id' => $id), Service::class);
-//    }
-//
-//    public function getServiceIdsByResellerId($resellerId){
-//        $ret = array();
-//        $result = $this->db->selectQuery(ApplicationConstants::GET_SERVICES_OF_RESELLER, array(':reseller_id' => $resellerId), 'int');
-//        foreach ($result as $service){
-//            array_push($ret, $service['id']);
-//        }
-//        return $ret;
-//    }
-//
-//    public function deleteServicesByResellerId($resellerId){
-//        return $this->db->updateQuery(ApplicationConstants::DELETE_RESELLER_SERVICE, array(':reseller_id' => $resellerId));
-//    }
+    public function getResellerTransactionsWithAdmin($reseller_id) {
+        return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_RESELLER, array(':to' => $reseller_id), Transaction::class);
+    }
 }

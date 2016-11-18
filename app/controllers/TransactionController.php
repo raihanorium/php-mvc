@@ -34,7 +34,7 @@ class TransactionController extends Controller {
                 $this->view->renderView('transaction/index_admin', $request);
                 break;
             case 2:
-                $request['transactions'] = $this->transactionService->getAllForAdmin();
+                $request['transactions'] = $this->transactionService->getResellerTransactionsWithAdmin(Security::getLoggedInUser()['id']);
                 $this->view->renderView('transaction/index_reseller', $request);
                 break;
             default:
