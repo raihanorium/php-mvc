@@ -9,13 +9,17 @@
                     <select name="to" id="reseller" class="form-control" required="required">
                         <option value="">-Select One-</option>
                         <?php foreach ($model['resellers'] as $reseller): ?>
-                        <option value="<?php echo $reseller['id']; ?>"><?php echo $reseller['full_name']; ?></option>
+                        <option
+                            value="<?php echo $reseller['id']; ?>"
+                            <?php echo (isset($model['to']) && ($model['to'] == $reseller['id']))? 'selected="selected"':'' ; ?>>
+                            <?php echo $reseller['full_name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-sm-6 form-group">
                     <label for="amount">Amount</label>
-                    <input name="amount" id="amount" class="form-control" type="number" required="required" placeholder="Amount (In BDT)"/>
+                    <input name="amount" id="amount" class="form-control" type="number" required="required"
+                           placeholder="Amount (In BDT)" value="<?php echo isset($model['amount'])? $model['amount'] : ''; ?>" />
                 </div>
             </div>
 
@@ -26,7 +30,8 @@
                 </div>
                 <div class="col-sm-6 form-group">
                     <label for="description">Description</label>
-                    <input name="description" id="description" class="form-control" type="text" placeholder="Put some text"/>
+                    <input name="description" id="description" class="form-control" type="text" placeholder="Put some text"
+                        value="<?php echo isset($model['description'])? $model['description'] : ''; ?>" />
                 </div>
             </div>
 

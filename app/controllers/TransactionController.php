@@ -3,8 +3,10 @@ namespace app\controllers;
 
 require_once 'app/service/TransactionService.php';
 require_once 'app/model/Transaction.php';
+require_once 'core/FormValidator.php';
 
 use core\Controller;
+use core\FormValidator;
 use core\Security;
 use model\Transaction;
 use services\ResellerService;
@@ -46,16 +48,22 @@ class TransactionController extends Controller {
             header("Location: ./?p=transaction");
         }
 
-        $transaction = new Transaction();
-        $transaction->from = Security::getLoggedInUser()['id'];
-        $transaction->to = $request['to'];
-        $transaction->amount = $request['amount'];
-        $transaction->description = $request['description'];
-
         try {
+            $transaction = new Transaction();
+            $transaction->from = FormValidator::validate(array('From' => Security::getLoggedInUser()['id']), array(FormValidator::$REQUIRED => true));
+            $transaction->to = FormValidator::validate(array('Reseller' => $request['to']), array(FormValidator::$REQUIRED => true));
+            $transaction->amount = FormValidator::validate(array('Amount' => $request['amount']),
+                array(
+                    FormValidator::$REQUIRED => true,
+                    FormValidator::$NUMERIC => true,
+                    FormValidator::$MINVALUE => 10
+                )
+            );
+            $transaction->description = $request['description'];
+
             $result = $this->transactionService->addAdminResellerTransaction($transaction);
             if($result > 0){
-                header("Location: ./?p=transaction");
+                $this->index($request);
             }
         } catch (\Exception $ex){
             $request['error'] = $ex->getMessage();
