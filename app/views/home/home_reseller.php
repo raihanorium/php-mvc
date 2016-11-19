@@ -86,6 +86,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="panel-footer">
+                    <small>Showing last 20 records.</small>
+                </div>
             </div>
         </div>
     </div>
