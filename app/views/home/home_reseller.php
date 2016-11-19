@@ -73,7 +73,15 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                            <?php foreach ($model['transactions'] as $transaction): ?>
+                                <tr>
+                                    <td><?php echo $transaction->to; ?></td>
+                                    <td><?php echo $transaction->service; ?></td>
+                                    <td align="right"><?php echo number_format($transaction->amount, 2, '.', ','); ?></td>
+                                    <td><?php echo $transaction->created_at; ?></td>
+                                    <td><?php echo ucfirst($transaction->status); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

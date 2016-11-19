@@ -39,6 +39,10 @@ final class TransactionService {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_ADMIN, array(), Transaction::class);
     }
 
+    public function getResellerCustomerTransactions($reseller_id){
+        return $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLER_CUSTOMER_TRANSACTIONS, array(':from' => $reseller_id), Transaction::class);
+    }
+
     public function addAdminResellerTransaction($transaction) {
         return $this->db->updateQuery(
             ApplicationConstants::INSERT_ADMIN_RESELLER_TRANSACTION,

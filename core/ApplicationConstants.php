@@ -134,4 +134,17 @@ interface ApplicationConstants {
     const INSERT_RESELLER_TRANSACTION = "
         INSERT INTO `reseller_transaction` (`service_id`, `from`, `to`, `amount`, `description`) VALUES(:service_id, :from, :to, :amount, :description);
     ";
+
+    const GET_ALL_RESELLER_CUSTOMER_TRANSACTIONS = "
+        SELECT
+            rt.to,
+            s.name AS `service`,
+            rt.amount,
+            rt.created_at,
+            rt.status
+        FROM `reseller_transaction` rt
+        INNER JOIN `service` s ON(s.id = rt.service_id)
+        WHERE rt.from=:from
+        ORDER BY rt.created_at DESC LIMIT 20;
+    ";
 }
