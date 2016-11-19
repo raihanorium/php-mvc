@@ -24,6 +24,7 @@ final class TransactionService {
     private function __construct() {
         $this->db = Database::Instance();
         $this->db->execute(ApplicationConstants::CREATE_ADMIN_RESELLER_TRANSACTION_TABLE);
+        $this->db->execute(ApplicationConstants::CREATE_RESELLER_TRANSACTION_TABLE);
     }
 
     public static function Instance() {
@@ -42,6 +43,19 @@ final class TransactionService {
         return $this->db->updateQuery(
             ApplicationConstants::INSERT_ADMIN_RESELLER_TRANSACTION,
             array(
+                ':from' => $transaction->from,
+                ':to' => $transaction->to,
+                ':amount' => $transaction->amount,
+                ':description' => $transaction->description
+            )
+        );
+    }
+
+    public function addResellerTransaction($transaction) {
+        return $this->db->updateQuery(
+            ApplicationConstants::INSERT_RESELLER_TRANSACTION,
+            array(
+                ':service_id' => $transaction->service_id,
                 ':from' => $transaction->from,
                 ':to' => $transaction->to,
                 ':amount' => $transaction->amount,

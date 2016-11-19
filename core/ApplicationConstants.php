@@ -114,4 +114,24 @@ interface ApplicationConstants {
       ";
     const INSERT_ADMIN_RESELLER_TRANSACTION = "INSERT INTO `admin_reseller_transaction`(`from`, `to`, `amount`, `description`)
       VALUES (:from, :to, :amount, :description);";
+
+    const CREATE_RESELLER_TRANSACTION_TABLE = "
+        CREATE TABLE IF NOT EXISTS `reseller_transaction` ( 
+            `id` INT NOT NULL AUTO_INCREMENT , 
+            `service_id` INT NOT NULL , 
+            `from` INT NOT NULL , 
+            `to` VARCHAR(20) NOT NULL , 
+            `amount` DOUBLE NOT NULL , 
+            `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+            `status` ENUM('pending','sent','error','aborted') NOT NULL DEFAULT 'pending' , 
+            `sms_txn_id` VARCHAR(50) NULL , 
+            `description` VARCHAR(255) NULL , 
+            PRIMARY KEY (`id`), 
+            INDEX `idx_from` (`from`), 
+            INDEX `idx_to` (`to`)
+        ) ENGINE = InnoDB;
+    ";
+    const INSERT_RESELLER_TRANSACTION = "
+        INSERT INTO `reseller_transaction` (`service_id`, `from`, `to`, `amount`, `description`) VALUES(:service_id, :from, :to, :amount, :description);
+    ";
 }

@@ -11,9 +11,12 @@ namespace model;
 
 class Transaction {
     public $id;
+    public $service_id;
     public $from;
     public $to;
     public $amount;
     public $created_at;
+    public $status;
+    public $sms_txn_id;
     public $description;
 }

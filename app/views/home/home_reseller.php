@@ -17,27 +17,41 @@
                 <br />
             </div>
 
-            <form action="">
+            <form action="?p=home&a=transaction_reseller" method="post">
                 <input type="hidden" name="service_id" id="subaction" />
+
                 <div class="row">
                     <div class="col-sm-6 form-group">
-                        <label>Number</label>
-                        <input class="form-control" type="text" placeholder="Send to" required="required"/>
+                        <label for="to">Number</label>
+                        <input name="to" id="to" type="text" class="form-control" required="required" placeholder="Recipient Number"
+                               value="<?php echo isset($model['to'])? $model['to'] : ''; ?>" />
                     </div>
                     <div class="col-sm-6 form-group">
-                        <label>Amount</label>
-                        <input class="form-control" type="number" required="required" placeholder="Amount (In BDT)"/>
+                        <label for="amount">Amount</label>
+                        <input name="amount" id="amount" class="form-control" type="number" required="required"
+                               placeholder="Amount (In BDT)" value="<?php echo isset($model['amount'])? $model['amount'] : ''; ?>" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-6 form-group">
-                        <label>PIN</label>
-                        <input class="form-control" type="number" required="required" placeholder="Your PIN"/>
+                        <label for="pin">PIN</label>
+                        <input name="pin" id="pin" class="form-control" type="password" required="required" placeholder="Your PIN"/>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="description">Description</label>
+                        <input name="description" id="description" class="form-control" type="text" placeholder="Put some text"
+                               value="<?php echo isset($model['description'])? $model['description'] : ''; ?>" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+
                     </div>
                     <div class="col-sm-6 form-group">
                         <label>&nbsp;</label>
-                        <input class="btn btn-lg btn-primary pull-right" type="submit" value="Send" style="margin-top: 15px;" />
+                        <input name="submit" class="btn btn-lg btn-primary pull-right" type="submit" value="Send" style="margin-top: 15px;" />
                     </div>
                 </div>
             </form>
