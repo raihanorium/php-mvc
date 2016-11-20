@@ -147,4 +147,11 @@ interface ApplicationConstants {
         WHERE rt.from=:from
         ORDER BY rt.created_at DESC LIMIT 20;
     ";
+
+    const GET_RESELLER_BALANCE = "
+        SELECT (a.total - r.total) `balance` FROM(
+        (SELECT SUM(`amount`) `total` FROM `admin_reseller_transaction` WHERE `to`=:reseller_id) a,
+        (SELECT SUM(`amount`) `total` FROM `reseller_transaction` WHERE `from`=:reseller_id) r
+        )
+    ";
 }

@@ -35,6 +35,7 @@ class HomeController extends Controller {
             case 2:
                 $request['services'] = $this->resellerService->getAllServices($user['id']);
                 $request['transactions'] = $this->transactionService->getResellerCustomerTransactions($user['id']);
+                $request['balance'] = $this->resellerService->getBalance($user['id']);
                 $this->view->renderView('home/home_reseller', $request);
                 break;
             default:

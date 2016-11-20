@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="row">
-                <h3>Your Balance: <span class="label label-success">2350.00</span> BDT</h3>
+                <h3>Your Balance: <span class="label label-success"><?php echo number_format($model['balance'], 2, '.', ','); ?></span> BDT</h3>
                 <br />
             </div>
 

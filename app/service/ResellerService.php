@@ -156,4 +156,8 @@ final class ResellerService {
         return $this->db->selectQuery(ApplicationConstants::SELECT_RESELLER_BY_USERNAME_PASSWORD,
             array(':username' => $username, ':password' => $password), Reseller::class);
     }
+
+    public function getBalance($reseller_id){
+        return $this->db->selectQuery(ApplicationConstants::GET_RESELLER_BALANCE, array(':reseller_id' => $reseller_id), 'double')[0]['balance'];
+    }
 }
