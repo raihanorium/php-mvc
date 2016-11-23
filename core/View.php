@@ -14,7 +14,8 @@ class View{
 	}
 
 	public function renderTemplate($model = null){
-		$viewName = strtolower(basename(debug_backtrace()[1]['class'], 'Controller'));
+        $a= debug_backtrace()[1]['class'];
+        $viewName = strtolower(str_replace('Controller', '', explode('\\', $a)[sizeof($a) + 1]));
 		$action = debug_backtrace()[1]['function'];
 
 		$viewPath = $this->VIEW_PATH_PREFIX . $viewName . '/' . $action . $this->VIEW_PATH_SUFFIX;
