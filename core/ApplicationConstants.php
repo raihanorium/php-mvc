@@ -154,4 +154,48 @@ interface ApplicationConstants {
         (SELECT SUM(`amount`) `total` FROM `reseller_transaction` WHERE `from`=:reseller_id) r
         )
     ";
+
+    const CREATE_RATE_PLAN_TABLE = "
+        CREATE TABLE IF NOT EXISTS `rate_plan` ( 
+          `id` INT NOT NULL AUTO_INCREMENT ,
+          `name` VARCHAR(50) NOT NULL ,
+          `description` VARCHAR(255) NULL ,
+          PRIMARY KEY (`id`)
+        ) ENGINE = InnoDB;
+        
+        INSERT INTO `rate_plan`(`id`, `name`, `description`)
+        	SELECT 1, 'Default', 'Default system rate plan' FROM DUAL
+        WHERE NOT EXISTS
+        	(SELECT * FROM `rate_plan` WHERE `id`=1);
+    ";
+
+    const CREATE_RATE_PLAN_SERVICE_TABLE = "
+        CREATE TABLE IF NOT EXISTS `rate_plan_service` (
+          `rate_plan_id` int(11) NOT NULL,
+          `service_id` int(11) NOT NULL,
+          `rate` float NOT NULL,
+          PRIMARY KEY (`rate_plan_id`,`service_id`)
+        ) ENGINE=InnoDB;
+        
+        INSERT INTO `rate_plan_service`(`rate_plan_id`, `service_id`, `rate`)
+          SELECT 1,`id`, 0.0 FROM `service` WHERE `is_active`=1
+          AND NOT EXISTS(SELECT * FROM `rate_plan_service` WHERE `rate_plan_id`=1)
+          ORDER BY `id`;
+    ";
+
+    const GET_RATE_PLANS = "
+        SELECT * FROM `rate_plan`;
+    ";
+
+    const GET_RATE_PLAN_SERVICE = "
+        SELECT
+            rps.`service_id`,
+            s.`name` AS `service_name`,
+            rps.rate
+        FROM `rate_plan_service` rps
+        INNER JOIN `rate_plan` rp ON(rp.`id` = rps.`rate_plan_id`)
+        INNER JOIN `service` s ON(s.`id` = rps.`service_id`)
+        WHERE rps.`rate_plan_id`=:plan_id
+        ORDER BY s.`id`;
+    ";
 }
