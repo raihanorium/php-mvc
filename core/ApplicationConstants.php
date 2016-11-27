@@ -187,6 +187,11 @@ interface ApplicationConstants {
         SELECT * FROM `rate_plan`;
     ";
 
+    const CREATE_RATE_PLAN = "
+        INSERT INTO `rate_plan`(`name`, `description`)
+        	VALUES(:plan_name, 'User created rate plan');
+    ";
+
     const GET_RATE_PLAN_SERVICE = "
         SELECT
             rps.`service_id`,
@@ -197,5 +202,10 @@ interface ApplicationConstants {
         INNER JOIN `service` s ON(s.`id` = rps.`service_id`)
         WHERE rps.`rate_plan_id`=:plan_id
         ORDER BY s.`id`;
+    ";
+
+    const CREATE_RATE_PLAN_SERVICE = "
+        INSERT INTO `rate_plan_service`(`rate_plan_id`, `service_id`, `rate`)
+        VALUES(:rate_plan_id, :service_id, :rate);
     ";
 }

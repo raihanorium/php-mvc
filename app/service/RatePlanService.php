@@ -39,4 +39,16 @@ final class RatePlanService {
     public function getPlanDetails($planId) {
         return $this->db->selectQuery(ApplicationConstants::GET_RATE_PLAN_SERVICE, array(':plan_id' => $planId), 'array');
     }
+
+    public function createPlan($planName){
+        return $this->db->insertQuery(ApplicationConstants::CREATE_RATE_PLAN, array(':plan_name' => $planName));
+    }
+
+    public function addRatePlanService($planId, $serviceId, $rate){
+        return $this->db->updateQuery(ApplicationConstants::CREATE_RATE_PLAN_SERVICE, array(
+            ':rate_plan_id' => $planId,
+            ':service_id' => $serviceId,
+            ':rate' => $rate
+        ));
+    }
 }

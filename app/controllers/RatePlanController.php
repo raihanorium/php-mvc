@@ -29,4 +29,17 @@ class RatePlanController extends Controller {
         $request['rate_plans'] = $this->ratePlanService->getAllPlan();
         $this->view->renderView('rateplan/index', $request);
     }
+
+    public function save_as($request){
+        if(!isset($request['submit'])){
+            header('Location: .?p=rateplan');
+        }
+
+        $plan_id = $this->ratePlanService->createPlan($request['plan_name']);
+        foreach ($request['service'] as $service_id => $rate){
+            $this->ratePlanService->addRatePlanService($plan_id, $service_id, $rate);
+        }
+
+        header('Location: .?p=rateplan');
+    }
 }

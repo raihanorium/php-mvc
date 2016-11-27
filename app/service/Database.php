@@ -49,6 +49,20 @@ final class Database {
         return $allData;
     }
 
+    public function insertQuery($query, $parameters) {
+        try {
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute($parameters);
+
+            # Last inserted id
+            return $this->pdo->lastInsertId();
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function updateQuery($query, $parameters) {
         try {
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
