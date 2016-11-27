@@ -2,7 +2,16 @@
 <layoutsection name="title">Rate Plan</layoutsection>
 <layoutsection name="body">
     <div class="col-sm-4">
-
+        <form action="">
+            <?php foreach ($model['plan'] as $plan): ?>
+            <div class="form-group">
+                <label for="service_<?php echo $plan['service_id']; ?>"><?php echo $plan['service_name']; ?></label>
+                <input type="text" class="form-control" id="service_<?php echo $plan['service_id']; ?>"
+                       name="service[<?php echo $plan['service_id']; ?>]"
+                       value="<?php echo $plan['rate']; ?>" required="required" />
+            </div>
+            <?php endforeach; ?>
+        </form>
     </div>
 
     <div class="col-sm-8 table-responsive">
