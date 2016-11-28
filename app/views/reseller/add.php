@@ -60,7 +60,7 @@
 
                         <?php foreach ($model['services'] as $service) : ?>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="services[]" required="required" value="<?php echo $service['id']; ?>" /><?php echo $service['name']; ?></label>
+                            <label><input type="checkbox" name="services[]" value="<?php echo $service['id']; ?>" /><?php echo $service['name']; ?></label>
                         </div>
                         <?php endforeach; ?>
                     </fieldset>
