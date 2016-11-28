@@ -16,6 +16,7 @@ class Reseller {
     public $email;
     public $password;
     public $role; // 1=Admin, 2=Reseller
+    public $rate_plan_id;
     public $services = array();
     public $is_active;
     public $created_at;

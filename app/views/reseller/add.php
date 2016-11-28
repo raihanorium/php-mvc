@@ -38,6 +38,15 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="ratePlan">Rate Plan</label>
+                        <select name="rate_plan_id" id="ratePlan" class="form-control" required="required">
+                            <?php foreach ($model['rate_plans'] as $plan) : ?>
+                                <option value="<?php echo $plan->id; ?>" <?php echo isset($model['rate_plan_id']) ? ($model['rate_plan_id'] == $plan->id)? 'selected="selected"' : '' : '' ?>><?php echo $plan->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="isActive" name="is_active" <?php echo isset($model['is_active']) ? 'checked="checked"' : '' ?> /> Active
@@ -51,7 +60,7 @@
 
                         <?php foreach ($model['services'] as $service) : ?>
                         <div class="checkbox">
-                            <label><input type="checkbox" name="services[]" value="<?php echo $service['id']; ?>" /><?php echo $service['name']; ?></label>
+                            <label><input type="checkbox" name="services[]" required="required" value="<?php echo $service['id']; ?>" /><?php echo $service['name']; ?></label>
                         </div>
                         <?php endforeach; ?>
                     </fieldset>

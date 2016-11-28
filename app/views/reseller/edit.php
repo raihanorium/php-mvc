@@ -39,6 +39,16 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="ratePlan">Rate Plan</label>
+                        <select name="rate_plan_id" id="ratePlan" class="form-control" required="required">
+                            <?php foreach ($model['rate_plans'] as $plan) : ?>
+                                <option value="<?php echo $plan->id; ?>"
+                                    <?php echo ($plan->id == $model['reseller']['rate_plan_id'])? 'selected="selected"' : ''; ?>><?php echo $plan->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="isActive" name="is_active"

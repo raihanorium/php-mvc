@@ -58,6 +58,7 @@ final class ResellerService {
                 ':email' => $reseller->email,
                 ':password' => $reseller->password,
                 ':role' => $reseller->role,
+                ':rate_plan_id' => $reseller->rate_plan_id,
                 ':is_active' => $reseller->is_active
             )
         );
@@ -86,6 +87,7 @@ final class ResellerService {
                 ':id' => $reseller->id,
                 ':full_name' => $reseller->full_name,
                 ':password' => $reseller->password,
+                ':rate_plan_id' => $reseller->rate_plan_id,
                 ':is_active' => $reseller->is_active
             )
         );
