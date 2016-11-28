@@ -1,7 +1,9 @@
 <html>
 <layoutsection name="title">Rate Plan</layoutsection>
 <layoutsection name="body">
-    <form action="?p=rateplan&a=save_as" method="post">
+    <form action="?p=rateplan&a=submit" method="post">
+        <input type="hidden" name="selected_plan_id" value="<?php echo isset($_GET['id'])? $_GET['id'] : ''; ?>" />
+
         <div class="col-sm-4">
             <?php foreach ($model['plan'] as $plan): ?>
                 <div class="form-group">
@@ -16,9 +18,11 @@
         <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-6 form-group">
-                    <input name="plan_name" id="plan_name" class="form-control" type="text" required="required" placeholder="Enter new plan name" value=""/>
+                    <input name="plan_name" id="plan_name" class="form-control" type="text" required="required"
+                           placeholder="Enter new plan name" value="<?php echo isset($model['plan_name'])? $model['plan_name'] : ''; ?>"/>
                 </div>
                 <div class="col-sm-6 form-group">
+                    <input type="submit" class="btn btn-info" name="submit" value="Save" />
                     <input type="submit" class="btn btn-primary" name="submit" value="Save As" />
                 </div>
             </div>

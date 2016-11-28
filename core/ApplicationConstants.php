@@ -192,8 +192,13 @@ interface ApplicationConstants {
         	VALUES(:plan_name, 'User created rate plan');
     ";
 
+    const UPDATE_RATE_PLAN = "
+        UPDATE `rate_plan` SET `name`=:plan_name WHERE `id`=:plan_id;
+    ";
+
     const GET_RATE_PLAN_SERVICE = "
         SELECT
+            rp.`name` AS `plan_name`,
             rps.`service_id`,
             s.`name` AS `service_name`,
             rps.rate
@@ -207,5 +212,10 @@ interface ApplicationConstants {
     const CREATE_RATE_PLAN_SERVICE = "
         INSERT INTO `rate_plan_service`(`rate_plan_id`, `service_id`, `rate`)
         VALUES(:rate_plan_id, :service_id, :rate);
+    ";
+
+    const UPDATE_RATE_PLAN_SERVICE = "
+        UPDATE `rate_plan_service` SET `rate`=:rate
+        WHERE `rate_plan_id`=:rate_plan_id AND `service_id`=:service_id;
     ";
 }
