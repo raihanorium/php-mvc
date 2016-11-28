@@ -2,10 +2,8 @@
 namespace app\controllers;
 
 require_once 'app/service/RatePlanService.php';
-require_once 'core/FormValidator.php';
 
 use core\Controller;
-use core\FormValidator;
 use services\RatePlanService;
 
 /**
@@ -50,7 +48,11 @@ class RatePlanController extends Controller {
 
     private function save($request){
         try {
-            $planId = FormValidator::validate(array('Plan' => $request['selected_plan_id']), array(FormValidator::$REQUIRED => true));
+            if($request['selected_plan_id'] == ''){
+                throw new \Exception('Please select an existing plan first.');
+            }
+
+            $planId = $request['selected_plan_id'];
             if($planId == 1){
                 throw new \Exception('Default plan cannot be saved. Use Save As instead.');
             }
