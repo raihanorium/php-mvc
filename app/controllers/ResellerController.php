@@ -81,9 +81,6 @@ class ResellerController extends Controller {
     }
 
     public function update($request){
-        echo '<pre>';
-        var_dump($request);
-        echo '</pre>';
         $reseller = $this->resellerService->get($request['id']);
         $reseller->full_name = $request['full_name'];
         $reseller->services = $request['services'];
