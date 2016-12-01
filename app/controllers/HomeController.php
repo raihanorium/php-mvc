@@ -56,7 +56,7 @@ class HomeController extends Controller {
             $transaction = new Transaction();
             $transaction->service_id = FormValidator::validate(array('Service' => $request['service_id']), array(FormValidator::$REQUIRED => true));
             $transaction->from = FormValidator::validate(array('From' => Security::getLoggedInUser()['id']), array(FormValidator::$REQUIRED => true));
-            $transaction->to = FormValidator::validate(array('Reseller' => $request['to']), array(FormValidator::$REQUIRED => true));
+            $transaction->to = FormValidator::validate(array('Reseller' => $request['to']), array(FormValidator::$REQUIRED => true, FormValidator::$MOBILE_NUMBER => true));
             $transaction->amount = FormValidator::validate(array('Amount' => $request['amount']),
                 array(
                     FormValidator::$REQUIRED => true,
