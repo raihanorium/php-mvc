@@ -8,6 +8,8 @@
 
 namespace core;
 
+use services\ServiceService;
+
 require_once 'FormValidationException.php';
 
 class FormValidator {
@@ -22,6 +24,9 @@ class FormValidator {
 
     public static $MOBILE_NUMBER = "mobilenumber";
     private static $MOBILE_NUMBER_MESSAGE = "is not a valid mobile number.";
+
+    public static $NUMBER_OPERATOR = "numberoperator";
+    private static $NUMBER_OPERATOR_MESSAGE = "is not a valid number for operator";
 
     public static function validate($field = array(), $rules = array()) {
         foreach ($rules as $ruleName => $ruleValue) {
@@ -66,6 +71,17 @@ class FormValidator {
         }
     }
 
+    private static function numberOperatorValidator($field = array(), $operatorId){
+        $service = ServiceService::Instance()->get($operatorId)[0];
+        foreach ($field as $fieldName => $value) {
+            if($service['operator_code']) {
+                if (substr($value, 0, 3) != $service['operator_code']) {
+                    throw new FormValidationException($value . ' ' . self::$NUMBER_OPERATOR_MESSAGE . ' ' . $service['name']);
+                }
+            }
+        }
+    }
+
     private static function validateByRuleNameAndValue($field, $ruleName, $ruleValue) {
         switch ($ruleName) {
             case self::$REQUIRED:
@@ -83,6 +99,9 @@ class FormValidator {
                 break;
             case self::$MOBILE_NUMBER:
                 self::mobileNumberValidator($field);
+                break;
+            case self::$NUMBER_OPERATOR:
+                self::numberOperatorValidator($field, $ruleValue);
                 break;
             default:
                 throw new GlobalException('Cannot validate field ' . key($field));
