@@ -35,7 +35,12 @@ final class ResellerService {
     }
 
     public function getAll(){
-        return $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLERS, array(), Reseller::class);
+        $resellers = $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLERS, array(), Reseller::class);
+        foreach ($resellers as $reseller){
+            $reseller->balance = $this->getBalance($reseller->id);
+        }
+
+        return $resellers;
     }
 
     public function getAllActive(){

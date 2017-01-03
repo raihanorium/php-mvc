@@ -183,9 +183,9 @@ interface ApplicationConstants {
 
     const CREATE_RATE_PLAN_SERVICE_TABLE = "
         CREATE TABLE IF NOT EXISTS `rate_plan_service` (
-          `rate_plan_id` int(11) NOT NULL,
-          `service_id` int(11) NOT NULL,
-          `rate` float NOT NULL,
+          `rate_plan_id` INT(11) NOT NULL,
+          `service_id` INT(11) NOT NULL,
+          `rate` FLOAT NOT NULL,
           PRIMARY KEY (`rate_plan_id`,`service_id`)
         ) ENGINE=InnoDB;
         

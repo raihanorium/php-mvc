@@ -10,7 +10,7 @@
                 <table class="table table-bordered table-condensed table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Role</th> <th>Created At</th> <th>Active</th> <th></th>
+                        <th>Full Name</th> <th>Username</th> <th>Email</th> <th>Role</th> <th>Balance</th> <th>Created At</th> <th>Active</th> <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -20,6 +20,7 @@
                         <td><?php echo $reseller->username; ?></td>
                         <td><?php echo $reseller->email; ?></td>
                         <td><?php echo ($reseller->role == 1)? 'Admin' : 'Reseller'; ?></td>
+                        <td class="text-right"><?php echo number_format($reseller->balance, 2, '.', ','); ?></td>
                         <td><?php echo $reseller->created_at; ?></td>
                         <td class="text-center">
                             <span class="glyphicon glyphicon-<?php echo $reseller->is_active? 'check' : 'unchecked'; ?>"></span>
