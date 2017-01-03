@@ -26,7 +26,7 @@ class FormValidator {
     private static $MOBILE_NUMBER_MESSAGE = "is not a valid mobile number.";
 
     public static $NUMBER_OPERATOR = "numberoperator";
-    private static $NUMBER_OPERATOR_MESSAGE = "is not a valid number for operator";
+    private static $NUMBER_OPERATOR_MESSAGE = "%s is not a valid %s number.";
 
     public static function validate($field = array(), $rules = array()) {
         foreach ($rules as $ruleName => $ruleValue) {
@@ -76,7 +76,7 @@ class FormValidator {
         foreach ($field as $fieldName => $value) {
             if($service['operator_code']) {
                 if (substr($value, 0, 3) != $service['operator_code']) {
-                    throw new FormValidationException($value . ' ' . self::$NUMBER_OPERATOR_MESSAGE . ' ' . $service['name']);
+                    throw new FormValidationException(sprintf(self::$NUMBER_OPERATOR_MESSAGE, $value, $service['name']));
                 }
             }
         }
