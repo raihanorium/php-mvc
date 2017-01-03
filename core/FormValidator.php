@@ -22,6 +22,9 @@ class FormValidator {
     public static $MINVALUE = "minvalue";
     private static $MINVALUE_MESSAGE = "must be at least";
 
+    public static $MAXVALUE = "maxvalue";
+    private static $MAXVALUE_MESSAGE = "must not be more than";
+
     public static $MOBILE_NUMBER = "mobilenumber";
     private static $MOBILE_NUMBER_MESSAGE = "is not a valid mobile number.";
 
@@ -63,6 +66,18 @@ class FormValidator {
         }
     }
 
+    private static function maxvalueValidator($field = array(), $ruleValue = 0) {
+        foreach ($field as $fieldName => $value) {
+            if (!is_numeric($value)) {
+                throw new FormValidationException($fieldName . ' ' . self::$NUMERIC_MESSAGE);
+            }
+
+            if ($value > $ruleValue) {
+                throw new FormValidationException($fieldName . ' ' . self::$MAXVALUE_MESSAGE . ' ' . $ruleValue);
+            }
+        }
+    }
+
     private static function mobileNumberValidator($field = array()) {
         foreach ($field as $fieldName => $value) {
             if (!preg_match("/^(?:\+?88)?01[15-9]\d{8}$/m", $value)) {
@@ -96,6 +111,9 @@ class FormValidator {
                 break;
             case self::$MINVALUE:
                 self::minvalueValidator($field, $ruleValue);
+                break;
+            case self::$MAXVALUE:
+                self::maxvalueValidator($field, $ruleValue);
                 break;
             case self::$MOBILE_NUMBER:
                 self::mobileNumberValidator($field);

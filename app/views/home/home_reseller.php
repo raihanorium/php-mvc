@@ -19,6 +19,7 @@
 
             <form action="?p=home&a=transaction_reseller" method="post">
                 <input type="hidden" name="service_id" id="subaction" />
+                <input type="hidden" name="balance" id="balance" value="<?php echo number_format($model['balance'], 2, '.', ','); ?>" />
 
                 <div class="row">
                     <div class="col-sm-6 form-group">
@@ -50,7 +51,6 @@
 
                     </div>
                     <div class="col-sm-6 form-group">
-                        <label>&nbsp;</label>
                         <input name="submit" class="btn btn-lg btn-primary pull-right" type="submit" value="Send" style="margin-top: 15px;" />
                     </div>
                 </div>

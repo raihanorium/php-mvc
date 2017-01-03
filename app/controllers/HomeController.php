@@ -67,7 +67,8 @@ class HomeController extends Controller {
                 array(
                     FormValidator::$REQUIRED => true,
                     FormValidator::$NUMERIC => true,
-                    FormValidator::$MINVALUE => 10
+                    FormValidator::$MINVALUE => 10,
+                    FormValidator::$MAXVALUE => floatval($request['balance'])
                 )
             );
             $transaction->description = $request['description'];
@@ -97,13 +98,12 @@ class HomeController extends Controller {
 
             if($transactionObj->status == 'pending'){
                 $this->transactionService->abort($transactionId);
-                $request['success'] = 'Transaction aborted.';
+                header("Location: ./");
             } else{
                 $request['error'] = 'This is not a pending transaction.';
+                $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
+                $this->index($request);
             }
-
-            $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
-            $this->index($request);
         } catch (\Exception $ex){
             $request['error'] = $ex->getMessage();
             $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);

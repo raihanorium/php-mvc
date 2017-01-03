@@ -20,9 +20,11 @@ require_once 'app/model/ResellerService.php';
 
 final class TransactionService {
     private $db;
+    private $resellerService;
 
     private function __construct() {
         $this->db = Database::Instance();
+        $this->resellerService = ResellerService::Instance();
         $this->db->execute(ApplicationConstants::CREATE_ADMIN_RESELLER_TRANSACTION_TABLE);
         $this->db->execute(ApplicationConstants::CREATE_RESELLER_TRANSACTION_TABLE);
     }
@@ -64,6 +66,10 @@ final class TransactionService {
     }
 
     public function addResellerTransaction($transaction) {
+        $balance = $this->resellerService->getBalance($transaction->from);
+        if($balance < $transaction->amount){
+            throw new GlobalException('Insufficient balance.');
+        }
         return $this->db->updateQuery(
             ApplicationConstants::INSERT_RESELLER_TRANSACTION,
             array(

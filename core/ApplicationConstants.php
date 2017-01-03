@@ -163,7 +163,7 @@ interface ApplicationConstants {
     const GET_RESELLER_BALANCE = "
         SELECT (a.total - r.total) `balance` FROM(
         (SELECT IFNULL(SUM(`amount`), 0) `total` FROM `admin_reseller_transaction` WHERE `to`=:reseller_id) a,
-        (SELECT IFNULL(SUM(`amount`), 0) `total` FROM `reseller_transaction` WHERE `from`=:reseller_id) r
+        (SELECT IFNULL(SUM(`amount`), 0) `total` FROM `reseller_transaction` WHERE `from`=:reseller_id AND `status`<>'aborted') r
         )
     ";
 
