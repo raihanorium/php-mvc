@@ -70,6 +70,7 @@
                                 <th>Amount</th>
                                 <th>Date</th>
                                 <th>Status</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -80,6 +81,17 @@
                                     <td align="right"><?php echo number_format($transaction->amount, 2, '.', ','); ?></td>
                                     <td><?php echo $transaction->created_at; ?></td>
                                     <td><?php echo ucfirst($transaction->status); ?></td>
+                                    <td>
+                                        <?php if($transaction->status == 'pending'): ?>
+                                        <form action="?p=home&a=abort_transaction" method="post">
+                                            <input type="hidden" name="id" value="<?php echo $transaction->id; ?>" />
+                                            <button type="submit" name="submit" value="submit" class="btn btn-xs btn-danger"
+                                                onclick="return confirm('Are you sure you want to stop this transaction?');">
+                                                Abort
+                                            </button>
+                                        </form>
+                                        <?php endif; ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

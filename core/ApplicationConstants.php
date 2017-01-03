@@ -113,6 +113,16 @@ interface ApplicationConstants {
         WHERE art.`to`=:to
         ORDER BY art.created_at DESC LIMIT 20
       ";
+    const GET_TRANSACTION = "
+        SELECT
+            *
+        FROM `reseller_transaction` rt
+        WHERE rt.`id`=:id
+      ";
+    const CANCEL_TRANSACTION = "
+        UPDATE `reseller_transaction` rt SET rt.`status`='aborted'
+        WHERE rt.`id`=:id
+      ";
     const INSERT_ADMIN_RESELLER_TRANSACTION = "INSERT INTO `admin_reseller_transaction`(`from`, `to`, `amount`, `description`)
       VALUES (:from, :to, :amount, :description);";
 
@@ -138,6 +148,7 @@ interface ApplicationConstants {
 
     const GET_ALL_RESELLER_CUSTOMER_TRANSACTIONS = "
         SELECT
+            rt.id,
             rt.to,
             s.name AS `service`,
             rt.amount,

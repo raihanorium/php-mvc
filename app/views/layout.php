@@ -27,6 +27,12 @@
                 <strong>Error!</strong> <?php echo $model['error']; ?>
             </div>
         <?php endif; ?>
+        <?php if(isset($model['success'])): ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> <?php echo $model['success']; ?>
+            </div>
+        <?php endif; ?>
 
 		<?php echo $LAYOUT_SECTION['body']; ?>
 	</div>

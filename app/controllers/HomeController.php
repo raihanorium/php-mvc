@@ -82,4 +82,32 @@ class HomeController extends Controller {
             $this->index($request);
         }
     }
+
+    /**
+     * @hasAnyRole(reseller)
+     */
+    public function abort_transaction($request){
+        if(!isset($request['submit'])){
+            header("Location: ./");
+        }
+
+        try{
+            $transactionId = $request['id'];
+            $transactionObj = $this->transactionService->get($transactionId)[0];
+
+            if($transactionObj->status == 'pending'){
+                $this->transactionService->abort($transactionId);
+                $request['success'] = 'Transaction aborted.';
+            } else{
+                $request['error'] = 'This is not a pending transaction.';
+            }
+
+            $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
+            $this->index($request);
+        } catch (\Exception $ex){
+            $request['error'] = $ex->getMessage();
+            $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
+            $this->index($request);
+        }
+    }
 }

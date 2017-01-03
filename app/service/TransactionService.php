@@ -35,6 +35,14 @@ final class TransactionService {
         return $inst;
     }
 
+    public function get($transaction_id) {
+        return $this->db->selectQuery(ApplicationConstants::GET_TRANSACTION, array(':id' => $transaction_id), Transaction::class);
+    }
+
+    public function abort($transaction_id) {
+        return $this->db->updateQuery(ApplicationConstants::CANCEL_TRANSACTION, array(':id' => $transaction_id));
+    }
+
     public function getAllForAdmin() {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_ADMIN, array(), Transaction::class);
     }
