@@ -30,7 +30,7 @@
                                     <form action="?p=home&a=mark_sent" method="post" class="form-inline">
                                         <div class="input-group">
                                             <input type="hidden" name="id" value="<?php echo $transaction['id']; ?>" />
-                                            <input type="text" id="txnId" name="txnId"  class="form-control input-xs" placeholder="TXN Id" />
+                                            <input type="text" id="txnId" name="txnId"  class="form-control input-xs" placeholder="TXN Id" required="required" />
                                             <span class="input-group-btn">
                                                 <button type="submit" name="submit" value="submit" class="btn btn-xs btn-success"
                                                     onclick="return confirm('Are you sure you want to mark this transaction as sent?');">

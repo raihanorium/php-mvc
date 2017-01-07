@@ -179,7 +179,7 @@ interface ApplicationConstants {
         INNER JOIN `service` s ON(s.id = rt.service_id)
         INNER JOIN `reseller` r ON(r.id = rt.from)
         WHERE rt.`status`='pending'
-        ORDER BY rt.created_at DESC LIMIT 20
+        ORDER BY rt.created_at ASC LIMIT 20
     ";
 
     const GET_RESELLER_BALANCE = "

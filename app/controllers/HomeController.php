@@ -63,12 +63,12 @@ class HomeController extends Controller {
                     FormValidator::$NUMBER_OPERATOR => $transaction->service_id
                 )
             );
-            $transaction->amount = FormValidator::validate(array('Amount' => $request['amount']),
+            $transaction->amount = FormValidator::validate(array('Amount' => (float) $request['amount']),
                 array(
                     FormValidator::$REQUIRED => true,
                     FormValidator::$NUMERIC => true,
                     FormValidator::$MINVALUE => 10,
-                    FormValidator::$MAXVALUE => floatval($request['balance'])
+                    FormValidator::$MAXVALUE => (float) preg_replace('/[^\d.]/', '', $request['balance'])
                 )
             );
             $transaction->description = $request['description'];
