@@ -85,7 +85,7 @@ class HomeController extends Controller {
     }
 
     /**
-     * @hasAnyRole(reseller)
+     * @hasAnyRole(reseller, admin)
      */
     public function abort_transaction($request){
         if(!isset($request['submit'])){
@@ -98,7 +98,35 @@ class HomeController extends Controller {
 
             if($transactionObj->status == 'pending'){
                 $this->transactionService->abort($transactionId);
-                header("Location: ./");
+                header('Location: ./?p=smstransaction');
+            } else{
+                $request['error'] = 'This is not a pending transaction.';
+                $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
+                $this->index($request);
+            }
+        } catch (\Exception $ex){
+            $request['error'] = $ex->getMessage();
+            $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
+            $this->index($request);
+        }
+    }
+
+    /**
+     * @hasAnyRole(admin)
+     */
+    public function mark_sent($request){
+        if(!isset($request['submit'])){
+            header("Location: ./");
+        }
+
+        try{
+            $transactionId = $request['id'];
+            $txnId = $request['txnId'];
+            $transactionObj = $this->transactionService->get($transactionId)[0];
+
+            if($transactionObj->status == 'pending'){
+                $this->transactionService->markAsSent($transactionId, $txnId);
+                header('Location: ./?p=smstransaction');
             } else{
                 $request['error'] = 'This is not a pending transaction.';
                 $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);

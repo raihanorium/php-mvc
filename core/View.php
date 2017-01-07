@@ -28,6 +28,10 @@ class View{
 		$this->_renderLayout($viewPath, $model);
 	}
 
+	public function redirectCurrentPath($request){
+        header('Location: ./?p=' . $request['p'] . '&a=' . $request['a']);
+    }
+
 	private function _renderLayout($viewPath, $model = null){
 		ob_start();
 		include $viewPath;

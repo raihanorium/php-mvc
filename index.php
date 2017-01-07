@@ -4,8 +4,10 @@ require_once('core/Security.php');
 require_once('core/UserNotLoggedInException.php');
 require_once('core/GlobalException.php');
 require_once('core/LoginFailedException.php');
+require_once('core/LoggerService.php');
 
 use core\Security;
+use services\LoggerService;
 
 if(!isset($_SESSION)) session_start();
 
@@ -15,6 +17,7 @@ $request = $_REQUEST;
 $controller = 'home';
 $action = 'index';
 
+// routing
 if(isset($vars['p'])){
 	$controller = $vars['p'];
 
@@ -22,6 +25,9 @@ if(isset($vars['p'])){
 		$action = $vars['a'];
 	}
 }
+
+// logging request
+LoggerService::Instance()->fileLog(sprintf('%s Processing request[/?p=%s&a=%s]', date('d M Y h:i:s A'), $controller, $action));
 
 $controllerFileName = ucfirst($controller) . 'Controller';
 $controllerFilePath = 'app/controllers/' . $controllerFileName . '.php';

@@ -26,6 +26,7 @@
                 </li>
 				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'service') ? 'active' : '';} ?>"><a href="?p=service">Services</a></li>
 				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'rateplan') ? 'active' : '';} ?>"><a href="?p=rateplan">Rate Plan</a></li>
+				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'smstransaction') ? 'active' : '';} ?>"><a href="?p=smstransaction">SMS Transactions</a></li>
                 <?php endif; ?>
 
 				<li class="<?php if (isset($_GET['p'])) {echo ($_GET['p'] == 'transaction') ? 'active' : '';} ?>"><a href="?p=transaction">Transactions</a></li>

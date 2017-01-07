@@ -45,12 +45,20 @@ final class TransactionService {
         return $this->db->updateQuery(ApplicationConstants::CANCEL_TRANSACTION, array(':id' => $transaction_id));
     }
 
+    public function markAsSent($transaction_id, $txnId) {
+        return $this->db->updateQuery(ApplicationConstants::TRANSACTION_MARK_AS_SENT, array(':id' => $transaction_id, ':txnId' => $txnId));
+    }
+
     public function getAllForAdmin() {
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_ADMIN, array(), Transaction::class);
     }
 
     public function getResellerCustomerTransactions($reseller_id){
         return $this->db->selectQuery(ApplicationConstants::GET_ALL_RESELLER_CUSTOMER_TRANSACTIONS, array(':from' => $reseller_id), Transaction::class);
+    }
+
+    public function getAllTransactionsToProcess() {
+        return $this->db->selectQuery(ApplicationConstants::GET_ALL_TRANSACTIONS_TO_PROCESS, array(), Transaction::class);
     }
 
     public function addAdminResellerTransaction($transaction) {

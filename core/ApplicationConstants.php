@@ -123,6 +123,12 @@ interface ApplicationConstants {
         UPDATE `reseller_transaction` rt SET rt.`status`='aborted'
         WHERE rt.`id`=:id
       ";
+    const TRANSACTION_MARK_AS_SENT = "
+        UPDATE `reseller_transaction` rt SET
+          rt.`status`='sent',
+          rt.`sms_txn_id`=:txnId
+        WHERE rt.`id`=:id
+      ";
     const INSERT_ADMIN_RESELLER_TRANSACTION = "INSERT INTO `admin_reseller_transaction`(`from`, `to`, `amount`, `description`)
       VALUES (:from, :to, :amount, :description);";
 
@@ -158,6 +164,22 @@ interface ApplicationConstants {
         INNER JOIN `service` s ON(s.id = rt.service_id)
         WHERE rt.from=:from
         ORDER BY rt.created_at DESC LIMIT 20;
+    ";
+
+    const GET_ALL_TRANSACTIONS_TO_PROCESS = "
+        SELECT
+            rt.id,
+            rt.to,
+            s.name AS `service`,
+            rt.amount,
+            r.full_name AS `reseller`,
+            rt.created_at,
+            rt.status
+        FROM `reseller_transaction` rt
+        INNER JOIN `service` s ON(s.id = rt.service_id)
+        INNER JOIN `reseller` r ON(r.id = rt.from)
+        WHERE rt.`status`='pending'
+        ORDER BY rt.created_at DESC LIMIT 20
     ";
 
     const GET_RESELLER_BALANCE = "

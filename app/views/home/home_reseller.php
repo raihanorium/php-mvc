@@ -81,7 +81,7 @@
                                     <td align="right"><?php echo number_format($transaction->amount, 2, '.', ','); ?></td>
                                     <td><?php echo $transaction->created_at; ?></td>
                                     <td><?php echo ucfirst($transaction->status); ?></td>
-                                    <td>
+                                    <td class="text-center">
                                         <?php if($transaction->status == 'pending'): ?>
                                         <form action="?p=home&a=abort_transaction" method="post">
                                             <input type="hidden" name="id" value="<?php echo $transaction->id; ?>" />
@@ -90,6 +90,10 @@
                                                 Abort
                                             </button>
                                         </form>
+                                        <?php elseif ($transaction->status == 'sent'): ?>
+                                            <span class="glyphicon glyphicon-ok-sign text-success"></span>
+                                        <?php elseif ($transaction->status == 'aborted'): ?>
+                                            <span class="glyphicon glyphicon-exclamation-sign text-warning"></span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

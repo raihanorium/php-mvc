@@ -25,3 +25,11 @@
 .dropdown-menu{ background-color: #488dbd;}
 .dropdown-menu>li>a {background-color: #488dbd; color: #fff;}
 .dropdown-menu>li>a:hover {background-color: #8ad8df; color: #fff;}
+
+.input-xs {
+    height: 22px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
