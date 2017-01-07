@@ -252,4 +252,17 @@ interface ApplicationConstants {
         UPDATE `rate_plan_service` SET `rate`=:rate
         WHERE `rate_plan_id`=:rate_plan_id AND `service_id`=:service_id;
     ";
+
+    const TODAYS_SALES_PER_SERVICE_REPORT = "
+        SELECT
+          rt.service_id,
+          s.name,
+          count(rt.service_id) transaction_count,
+          sum(rt.amount)       total_sales
+        FROM reseller_transaction rt
+          INNER JOIN service s ON (s.id = rt.service_id)
+        WHERE rt.status = 'sent' AND DATE(rt.created_at) = curdate()
+        GROUP BY rt.service_id
+        ORDER BY transaction_count DESC;
+    ";
 }

@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 require_once 'app/service/ResellerService.php';
+require_once 'app/service/ReportingService.php';
 require_once 'app/service/TransactionService.php';
 require_once 'app/model/Transaction.php';
 require_once 'core/FormValidator.php';
@@ -10,16 +11,19 @@ use core\Controller;
 use core\FormValidator;
 use core\Security;
 use model\Transaction;
+use services\ReportingService;
 use services\ResellerService;
 use services\TransactionService;
 
 class HomeController extends Controller {
     private $resellerService;
     private $transactionService;
+    private $reportingService;
 
     public function __construct() {
         $this->resellerService = ResellerService::Instance();
         $this->transactionService = TransactionService::Instance();
+        $this->reportingService = ReportingService::Instance();
         parent::__construct();
     }
 
@@ -30,6 +34,15 @@ class HomeController extends Controller {
         $user = Security::getLoggedInUser();
         switch ($user['role']){
             case 1:
+                $todaysSalesPerService = $this->reportingService->todaysSalesPerService();
+                $todaysSalesLabels = array();
+                $todaysSalesTotal = array();
+                foreach ($todaysSalesPerService as $data){
+                    array_push($todaysSalesLabels, $data['name']);
+                    array_push($todaysSalesTotal, $data['total_sales']);
+                }
+                $request['todaysSalesLabels'] = $todaysSalesLabels;
+                $request['todaysSalesTotal'] = $todaysSalesTotal;
                 $this->view->renderView('home/home_admin', $request);
                 break;
             case 2:

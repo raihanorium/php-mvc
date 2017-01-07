@@ -4,9 +4,9 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="panel panel-info">
-                <div class="panel-heading">Top 5 Reseller</div>
+                <div class="panel-heading">Today's Sales</div>
                 <div class="panel-body">
-                    <canvas id="monthlySalesChart" height="400"></canvas>
+                    <canvas id="todaysSalesChart" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -31,14 +31,14 @@
 <layoutsection name="script">
     <script type="text/javascript">
         $(document).ready(function () {
-            var ctx = document.getElementById("monthlySalesChart");
-            var monthlySalesChart = new Chart(ctx, {
+            var ctx = document.getElementById("todaysSalesChart");
+            var todaysSalesChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple"],
+                    labels: <?php echo json_encode($model['todaysSalesLabels']); ?>,
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2],
+                        label: 'BDT',
+                        data: <?php echo json_encode($model['todaysSalesTotal']); ?>,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
