@@ -34,15 +34,8 @@ class HomeController extends Controller {
         $user = Security::getLoggedInUser();
         switch ($user['role']){
             case 1:
-                $todaysSalesPerService = $this->reportingService->todaysSalesPerService();
-                $todaysSalesLabels = array();
-                $todaysSalesTotal = array();
-                foreach ($todaysSalesPerService as $data){
-                    array_push($todaysSalesLabels, $data['name']);
-                    array_push($todaysSalesTotal, $data['total_sales']);
-                }
-                $request['todaysSalesLabels'] = $todaysSalesLabels;
-                $request['todaysSalesTotal'] = $todaysSalesTotal;
+                $request = $this->prepareTodaysSalesPerServiceChart($request);
+                $request = $this->prepareThisMonthsSalesPerServiceChart($request);
                 $this->view->renderView('home/home_admin', $request);
                 break;
             case 2:
@@ -150,5 +143,31 @@ class HomeController extends Controller {
             $request['services'] = $this->resellerService->getAllServices(Security::getLoggedInUser()['id']);
             $this->index($request);
         }
+    }
+
+    private function prepareTodaysSalesPerServiceChart($request) {
+        $todaysSalesPerService = $this->reportingService->todaysSalesPerService();
+        $todaysSalesLabels = array();
+        $todaysSalesTotal = array();
+        foreach ($todaysSalesPerService as $data) {
+            array_push($todaysSalesLabels, $data['name']);
+            array_push($todaysSalesTotal, $data['total_sales']);
+        }
+        $request['todaysSalesLabels'] = $todaysSalesLabels;
+        $request['todaysSalesTotal'] = $todaysSalesTotal;
+        return $request;
+    }
+
+    private function prepareThisMonthsSalesPerServiceChart($request) {
+        $salesPerService = $this->reportingService->thisMonthsSalesPerService();
+        $salesLabels = array();
+        $salesTotal = array();
+        foreach ($salesPerService as $data) {
+            array_push($salesLabels, $data['name']);
+            array_push($salesTotal, $data['total_sales']);
+        }
+        $request['monthsSalesLabels'] = $salesLabels;
+        $request['monthsSalesTotal'] = $salesTotal;
+        return $request;
     }
 }

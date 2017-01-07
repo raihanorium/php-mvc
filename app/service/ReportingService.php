@@ -31,4 +31,8 @@ class ReportingService {
     public function todaysSalesPerService(){
         return $this->db->selectQuery(ApplicationConstants::TODAYS_SALES_PER_SERVICE_REPORT, array(), 'array');
     }
+
+    public function thisMonthsSalesPerService(){
+        return $this->db->selectQuery(ApplicationConstants::THIS_MONTHS_SALES_PER_SERVICE_REPORT, array(), 'array');
+    }
 }
