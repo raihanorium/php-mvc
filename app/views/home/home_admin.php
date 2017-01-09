@@ -19,12 +19,6 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="panel panel-info">
-                <div class="panel-heading">3</div>
-                <div class="panel-body">
-                    3
-                </div>
-            </div>
         </div>
     </div>
 </layoutsection>
