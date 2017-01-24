@@ -123,7 +123,7 @@ abstract class Security {
     }
 
     public static function getLoggedInUser(){
-        $user = $_SESSION['LOGGED_IN_USER'];
+        $user = isset($_SESSION['LOGGED_IN_USER'])? $_SESSION['LOGGED_IN_USER'] : null;
         return $user;
     }
 }

@@ -55,6 +55,7 @@
                     <table class="table table-bordered table-condensed table-striped table-hover">
                         <thead>
                         <tr>
+                            <th>Transaction No.</th>
                             <th>Date</th>
                             <th>From</th>
                             <th>To</th>
@@ -65,6 +66,7 @@
                         <tbody>
                         <?php foreach ($model['transactions'] as $transaction): ?>
                             <tr>
+                                <td><?php echo $transaction->id; ?></td>
                                 <td><?php echo $transaction->created_at; ?></td>
                                 <td><?php echo $transaction->from_name; ?></td>
                                 <td><?php echo $transaction->to_name; ?></td>

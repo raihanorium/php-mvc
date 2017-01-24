@@ -8,12 +8,13 @@
                 <table class="table table-bordered table-condensed table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>Date</th> <th>From</th> <th>To</th> <th>Amount</th> <th>Description</th>
+                        <th>Transaction No.</th> <th>Date</th> <th>From</th> <th>To</th> <th>Amount</th> <th>Description</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($model['transactions'] as $transaction): ?>
                         <tr>
+                            <td><?php echo $transaction->id; ?></td>
                             <td><?php echo $transaction->created_at; ?></td>
                             <td><?php echo $transaction->from_name; ?></td>
                             <td><?php echo $transaction->to_name; ?></td>

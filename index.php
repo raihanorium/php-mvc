@@ -27,7 +27,7 @@ if(isset($vars['p'])){
 }
 
 // logging request
-LoggerService::Instance()->fileLog(sprintf('%s Processing request[/?p=%s&a=%s]', date('d M Y h:i:s A'), $controller, $action));
+LoggerService::Instance()->fileLog(sprintf('%s Request[/?p=%s&a=%s] IP[%s] User[%s]', date('d M Y h:i:s A'), $controller, $action, $_SERVER['REMOTE_ADDR'], Security::getLoggedInUser()['id']));
 
 $controllerFileName = ucfirst($controller) . 'Controller';
 $controllerFilePath = 'app/controllers/' . $controllerFileName . '.php';
